@@ -33,6 +33,7 @@ const syncTables = async () => {
     description TEXT,
     price INTEGER,
     quantity INTEGER,
+    tag TEXT,
     image VARCHAR(255)
   );
   CREATE TABLE cart_products(

@@ -4,6 +4,7 @@ const JWT = process.env.JWT;
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
+// REMINDER TO ADD GETALLUSERS, UPDATE, AND DELETE USERS
 
 const createUser = async ({ username, password }) => {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
@@ -33,6 +34,46 @@ const getUserByToken = async (token) => {
   return user;
 }
 
+const getUserByUsername = async (username) => {
+  try {
+    const { rows: [user] } = await client.query(`
+  SELECT * FROM users
+  WHERE username = $1
+  `, [username]);
+    return user;
+  } catch (err) {
+    throw err;
+  }
+}
+
+const getUser = async ({ username, password }) => {
+  try {
+    const user = await getUserByUsername(username);
+    const hashedPassword = user.password;
+    const isValid = await bcrypt.compare(password, hashedPassword);
+    if (isValid) {
+      delete user.password;
+      return user;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+const getUserById = async (id) => {
+  try {
+    const { rows: [user] } = await client.query(`
+    SELECT id, username
+    FROM users
+    WHERE id = $1
+    `, [id]);
+    return user;
+  } catch (err) {
+    throw err;
+  }
+}
+
+
 const authenticate = async ({ username, password }) => {
   const SQL = `
     SELECT id
@@ -52,6 +93,9 @@ const authenticate = async ({ username, password }) => {
 module.exports = {
   createUser,
   authenticate,
-  getUserByToken
+  getUserByToken,
+  getUserByUsername,
+  getUser,
+  getUserById,
 };
 
