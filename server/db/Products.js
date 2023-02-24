@@ -1,5 +1,5 @@
 const client = require('./client');
-
+//ADD REVIEWS TO PRODUCTS
 const createProduct = async ({ name, description, price, tag, quantity }) => {
     try {
         const product = await client.query(`

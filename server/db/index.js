@@ -10,8 +10,8 @@ const dropTables = async () => {
   DROP TABLE IF EXISTS reviews;
   DROP TABLE IF EXISTS build_products;
   DROP TABLE IF EXISTS build;
-  DROP TABLE IF EXISTS cart;
   DROP TABLE IF EXISTS cart_products;
+  DROP TABLE IF EXISTS cart;
   DROP TABLE IF EXISTS products;
   DROP TABLE IF EXISTS users;
 `
@@ -36,16 +36,16 @@ const syncTables = async () => {
     tag TEXT,
     image VARCHAR(255)
   );
-  CREATE TABLE cart_products(
-    id SERIAL PRIMARY KEY,
-    "userId" INTEGER REFERENCES users(id),
-    "productsId" INTEGER REFERENCES products(id)
-  );
   CREATE TABLE cart(
     id SERIAL PRIMARY KEY,
     quantity INTEGER,
-    subtotal INTEGER,
-    "cartProductsId" INTEGER REFERENCES cart_products(id)
+    subtotal INTEGER
+  );
+  CREATE TABLE cart_products(
+    id SERIAL PRIMARY KEY,
+    "cartId" INTEGER REFERENCES cart(id),
+    "productsId" INTEGER REFERENCES products(id),
+    quantity INTEGER
   );
   CREATE TABLE build(
     id SERIAL PRIMARY KEY,
