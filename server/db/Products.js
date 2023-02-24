@@ -64,10 +64,42 @@ const getProductByName = async (name) => {
     }
 }
 
+const updateProducts = async (id, ...fields) => {
+    const setFields = Object.keys(fields).map(
+        (key, index) => `"${key}"=$${index + 1}`
+      ).join(', ');
+
+    try {
+        const {rows: [product]} = await client.query(`
+        UPDATE products
+        SET ${setFields}
+        WHERE id = ${id}
+        RETURNING *
+        `, Object.values(fields))
+        return product;
+    } catch (err) {
+        throw err;
+    }
+}
+
+const deleteProducts = async (id) => {
+    try {
+        const {rows: [product]} = await client.query(`
+        DELETE FROM products
+        WHERE id = $1
+        `[id])
+        return product
+    } catch (err) {
+        throw err;
+    }
+}
+
 module.exports = {
     createProduct,
     getAllProducts,
     getProductById,
     getProductByTag,
     getProductByName,
+    updateProducts,
+    deleteProducts
 };
