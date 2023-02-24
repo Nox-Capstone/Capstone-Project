@@ -102,6 +102,8 @@ const authenticate = async ({ username, password }) => {
   return jwt.sign({ id: response.rows[0].id }, JWT);
 }
 
+//Update and Delete functions for Tier II requirements
+
 module.exports = {
   createUser,
   authenticate,
