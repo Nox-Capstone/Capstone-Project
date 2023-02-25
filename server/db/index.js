@@ -38,15 +38,14 @@ const syncTables = async () => {
   );
   CREATE TABLE cart(
     id SERIAL PRIMARY KEY,
-    "userId" INTEGER REFERENCES users(id),
-    quantity INTEGER
+    "userId" INTEGER REFERENCES users(id)
   );
   CREATE TABLE cart_products(
     id SERIAL PRIMARY KEY,
     "cartId" INTEGER REFERENCES cart(id),
     "productsId" INTEGER REFERENCES products(id),
     quantity INTEGER,
-    UNIQUE("cartId","productId")
+    UNIQUE("cartId","productsId")
   );
   CREATE TABLE build(
     id SERIAL PRIMARY KEY,
