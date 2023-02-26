@@ -4,7 +4,7 @@ const JWT = process.env.JWT;
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-// REMINDER TO ADD GETALLUSERS, UPDATE, AND DELETE USERS
+// REMINDER TO ADD UPDATE, AND DELETE USERS
 
 const createUser = async ({ username, password }) => {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
@@ -60,31 +60,6 @@ const getUser = async ({ username, password }) => {
   }
 }
 
-const getUserById = async (id) => {
-  try {
-    const { rows: [user] } = await client.query(`
-    SELECT id, username
-    FROM users
-    WHERE id = $1
-    `, [id]);
-    return user;
-  } catch (err) {
-    throw err;
-  }
-}
-
-const getAllUsers = async () => {
-  try {
-    const { rows } = await client.query(`
-    SELECT *
-    FROM users
-    `)
-    return rows;
-  } catch (err) {
-    throw (err)
-  }
-}
-
 const updateUsers = async (id, ...fields) => {
   const setString = Object.keys(fields).map(
     (key, index) => `"${key}"=$${index + 1}`
@@ -117,6 +92,31 @@ async function thanosSnapUser(id) {
   }
 }
 
+const getUserById = async (id) => {
+  try {
+    const { rows: [user] } = await client.query(`
+    SELECT id, username
+    FROM users
+    WHERE id = $1
+    `, [id]);
+    return user;
+  } catch (err) {
+    throw err;
+  }
+}
+
+const getAllUsers = async () => {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM users
+    `)
+    return rows;
+  } catch (err) {
+    throw (err)
+  }
+}
+
 
 const authenticate = async ({ username, password }) => {
   const SQL = `
@@ -134,6 +134,8 @@ const authenticate = async ({ username, password }) => {
   return jwt.sign({ id: response.rows[0].id }, JWT);
 }
 
+//Update and Delete functions for Tier II requirements
+
 module.exports = {
   createUser,
   authenticate,
@@ -141,8 +143,9 @@ module.exports = {
   getUserByUsername,
   getUser,
   getUserById,
+  getAllUsers,
   updateUsers,
   thanosSnapUser,
-  getAllUsers,
+
 };
 
