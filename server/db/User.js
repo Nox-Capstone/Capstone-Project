@@ -73,6 +73,50 @@ const getUserById = async (id) => {
   }
 }
 
+const getAllUsers = async () => {
+  try {
+    const { rows } = await client.query(`
+    SELECT *
+    FROM users
+    `)
+    return rows;
+  } catch (err) {
+    throw (err)
+  }
+}
+
+const updateUsers = async (id, ...fields) => {
+  const setString = Object.keys(fields).map(
+    (key, index) => `"${key}"=$${index + 1}`
+  ).join(', ');
+  // console.log(setString)
+  try {
+    const { rows: [updatedUser] } = await client.query(`
+    UPDATE users
+    SET ${setString}
+    WHERE id=${id}
+    RETURNING *;
+    `, Object.values(fields));
+    return updatedUser;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function thanosSnapUser(id) {
+  try {
+    const { rows: [deleteUser] } = await client.query(`
+    DELETE
+    FROM users
+    WHERE id=$1
+    RETURNING *
+    `, [id]);
+    return deleteUser;
+  } catch (err) {
+    throw err;
+  }
+}
+
 
 const authenticate = async ({ username, password }) => {
   const SQL = `
@@ -97,5 +141,8 @@ module.exports = {
   getUserByUsername,
   getUser,
   getUserById,
+  updateUsers,
+  thanosSnapUser,
+  getAllUsers,
 };
 
