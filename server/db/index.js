@@ -172,8 +172,10 @@ const createInitialProducts = async () => {
       { name: "P12", description: "120mm", price: "15", quantity: "354", brand: "ARCTIC", tag: "case fan" },
 
     ]
+
+    //name,description,price,quantity,brand,tag
     const products = await Promise.all(productsToCreate.map(createProduct))
-    console.log(products)
+    console.log(JSON.stringify(products, null, 2))
     console.log('Finished Creating Products')
   } catch (err) {
     throw err;

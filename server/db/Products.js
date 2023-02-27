@@ -8,7 +8,7 @@ const createProduct = async ({ name, description, price, quantity, brand, tag })
         RETURNING *
         `;
         const product = await client.query(SQL, [name, description, price, quantity, brand, tag]);
-        return product;
+        return product.rows[0];
     } catch (err) {
         throw err;
     }
