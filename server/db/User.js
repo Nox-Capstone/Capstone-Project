@@ -6,13 +6,14 @@ const SALT_COUNT = 10;
 
 // REMINDER TO ADD UPDATE, AND DELETE USERS
 
-const createUser = async ({ username, password }) => {
+const createUser = async ({ username, password, isAdam }) => {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   const SQL = `
-    INSERT INTO users(username, password)
-    VALUES($1, $2) RETURNING *
+    INSERT INTO users(username, password, "isAdam")
+    VALUES($1, $2, $3) 
+    RETURNING *
   `;
-  const response = await client.query(SQL, [username, hashedPassword]);
+  const response = await client.query(SQL, [username, hashedPassword, isAdam]);
   return response.rows[0];
 }
 
