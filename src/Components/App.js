@@ -2,57 +2,58 @@ import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
 import { Link, Routes, Route } from 'react-router-dom';
+import Products from './Products';
 
 
-const App = ()=> {
+const App = () => {
   const [auth, setAuth] = useState({});
-  const attemptLogin = ()=> {
+  const attemptLogin = () => {
     const token = window.localStorage.getItem('token');
-    if(token){
+    if (token) {
       fetch(
         '/api/auth/',
         {
           method: 'GET',
           headers: {
-            'authorization': token 
+            'authorization': token
           }
         }
       )
-      .then( response => response.json())
-      .then( user => setAuth(user));
+        .then(response => response.json())
+        .then(user => setAuth(user));
     }
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     attemptLogin();
   }, []);
 
-  const logout = ()=> {
+  const logout = () => {
     window.localStorage.removeItem('token');
     setAuth({});
   }
 
-  const login = async({ username, password})=> {
+  const login = async ({ username, password }) => {
     fetch(
       '/api/auth/',
       {
         method: 'POST',
-        body: JSON.stringify({ username, password}),
+        body: JSON.stringify({ username, password }),
         headers: {
           'Content-Type': 'application/json'
         }
       }
     )
-    .then( response => response.json())
-    .then( (data) => {
-      if(data.token){
-        window.localStorage.setItem('token', data.token);
-        attemptLogin();
-      }
-      else {
-        console.log(data);
-      }
-    });
+      .then(response => response.json())
+      .then((data) => {
+        if (data.token) {
+          window.localStorage.setItem('token', data.token);
+          attemptLogin();
+        }
+        else {
+          console.log(data);
+        }
+      });
   };
 
   return (
@@ -63,7 +64,7 @@ const App = ()=> {
           auth.id ? (
             <>
               <Link to='/'>Home</Link>
-              <button onClick={ logout }>Logout { auth.username }</button>
+              <button onClick={logout}>Logout {auth.username}</button>
             </>
           ) : (
             <>
@@ -71,20 +72,23 @@ const App = ()=> {
             </>
           )
         }
+        <Link to='/products'>Products</Link>
       </nav>
+
       <Routes>
         {
           auth.id ? (
             <>
-            <Route path='/' element= { <Home auth={ auth }/> } />
+              <Route path='/' element={<Home auth={auth} />} />
             </>
 
-          ): (
+          ) : (
             <>
-            <Route path='/login' element= { <Login login={ login }/> } />
+              <Route path='/login' element={<Login login={login} />} />
             </>
           )
         }
+        <Route path='/products' element={<Products />} />
       </Routes>
     </div>
   );
