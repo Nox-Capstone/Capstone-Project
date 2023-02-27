@@ -4,7 +4,7 @@ const {
   createUser,
   authenticate
 } = require('./User');
-const {createProduct} = require('./Products');
+const { createProduct } = require('./Products');
 const dropTables = async () => {
   const SQL = `
   DROP TABLE IF EXISTS reviews;
