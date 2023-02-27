@@ -11,8 +11,8 @@ const dropTables = async () => {
   DROP TABLE IF EXISTS build_products;
   DROP TABLE IF EXISTS build;
   DROP TABLE IF EXISTS cart_products;
-  DROP TABLE IF EXISTS cart;
   DROP TABLE IF EXISTS products;
+  DROP TABLE IF EXISTS cart;
   DROP TABLE IF EXISTS users;
 `
   await client.query(SQL);

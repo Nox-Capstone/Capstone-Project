@@ -39,7 +39,7 @@ router.post('/register', async (req, res, next) => {
 // POST /api/users/login
 router.post('/login', requireUserPass, async (req, res, next) => {
     try {
-        const { username, password } = req.body
+        const { username, password } = req.body;
         const user = await getUser({username, password});
         if(user){
             //Need to test id to make sure we're getting it from getUser function.
