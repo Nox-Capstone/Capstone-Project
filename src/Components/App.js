@@ -3,6 +3,7 @@ import Home from './Home';
 import Login from './Login';
 import { Link, Routes, Route } from 'react-router-dom';
 import Products from './Products';
+import ProductView from './ProductView';
 
 
 const App = () => {
@@ -88,6 +89,7 @@ const App = () => {
             </>
           )
         }
+        <Route path='/products/:productId' element={<ProductView />} />
         <Route path='/products' element={<Products />} />
       </Routes>
     </div>
