@@ -3,7 +3,7 @@
 const fetchProducts = async () => {
     try {
         const response = await fetch(
-            'localhost:3000/api/products/',
+            '/api/products/',
             {
               method: 'GET'
             }

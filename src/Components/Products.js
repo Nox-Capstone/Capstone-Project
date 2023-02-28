@@ -17,7 +17,7 @@ const Products = () => {
     return (
         <div>
             <h1>
-                Products {products.length}
+                Products ({products.length})
             </h1>
         </div>
     )

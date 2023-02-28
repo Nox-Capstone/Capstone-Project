@@ -7,7 +7,7 @@ router.get('/', async (req, res, next) => {
     const products = await getAllProducts();
     try {
     if(products){
-        res.send({ products: products })
+        res.send(products)
     }else{
         next({
             name:'getProductsError',
