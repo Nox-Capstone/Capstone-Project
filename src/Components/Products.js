@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 
+const {fetchProducts} = "../api"
+
 const Products = () => {
     const [products, setProducts] = useState([]);
-    
+
+
+
     return (
         <div>
             <h1>

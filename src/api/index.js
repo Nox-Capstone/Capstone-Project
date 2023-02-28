@@ -1,8 +1,5 @@
 
 
-
-
-
 const fetchProducts = async () => {
     try {
         const response = await fetch(
@@ -12,8 +9,13 @@ const fetchProducts = async () => {
             }
         );
         const result = await response.json();
+        console.log(result);
 
     } catch (err) {
         console.log(err);
     }
+}
+
+module.exports = {
+    fetchProducts,
 }

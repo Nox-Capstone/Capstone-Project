@@ -61,3 +61,5 @@ router.post('/login', requireUserPass, async (req, res, next) => {
         throw err;
     }
 });
+
+module.exports = router;
