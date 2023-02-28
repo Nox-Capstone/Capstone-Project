@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { getAllProducts } = require("../db/Products");
 
+//This is api/products
 router.get('/', async (req, res, next) => {
     const products = await getAllProducts();
     try {
