@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from 'react';
-const { getAllProducts } = require("../../server/db/Products")
+import React, { useState } from 'react';
+
 const Products = () => {
     const [products, setProducts] = useState([]);
-    const allProductsList = async () => {
-        const getProducts = await getAllProducts();
-        setProducts(getProducts);
-    }
-    useEffect(() => {
-        allProductsList()
-    }, []);
-    console.log(products);
+    
     return (
         <div>
             <h1>
@@ -20,3 +13,4 @@ const Products = () => {
 }
 
 export default Products;
+
