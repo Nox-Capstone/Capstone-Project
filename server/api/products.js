@@ -3,10 +3,17 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { getAllProducts } = require("../db/Products");
 
-router.get('/', async (req, res, next) => {
+router.get('/products', async (req, res, next) => {
+    const products = await getAllProducts();
     try {
-        const products = await getAllProducts();
-        res.send(products);
+    if(products){
+        res.send({products:products})
+    }else{
+        next({
+            name:'getProductsError',
+            message: 'Failed to retrieve products'
+        })
+    }
     } catch (err) {
         next(err);
     }
