@@ -5,7 +5,7 @@ const fetchProducts = async () => {
         const response = await fetch(
             '/api/products/',
             {
-              method: 'GET'
+                method: 'GET'
             }
         );
         const result = await response.json();
@@ -16,6 +16,20 @@ const fetchProducts = async () => {
     }
 }
 
+const fetchProductsById = async (id) => {
+    try {
+        const response = await fetch(`
+        /api/products/${id}
+        `, {
+            method: 'GET'
+        }
+        );
+    } catch (err) {
+        console.err(err)
+    }
+}
+
 module.exports = {
     fetchProducts,
+    fetchProductsById
 }

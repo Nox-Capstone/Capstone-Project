@@ -5,9 +5,11 @@ import { Link, Routes, Route } from 'react-router-dom';
 import Products from './Products';
 import ProductView from './ProductView';
 
+import { fetchProducts } from '../api';
 
 const App = () => {
   const [auth, setAuth] = useState({});
+  const [products, setProducts] = useState([]);
   const attemptLogin = () => {
     const token = window.localStorage.getItem('token');
     if (token) {
@@ -24,9 +26,13 @@ const App = () => {
         .then(user => setAuth(user));
     }
   };
-
+  const getProducts = async () => {
+      const allProducts = await fetchProducts();
+      setProducts(allProducts)
+  }
   useEffect(() => {
     attemptLogin();
+    getProducts();
   }, []);
 
   const logout = () => {
@@ -89,8 +95,8 @@ const App = () => {
             </>
           )
         }
-        <Route path='/products/:productId' element={<ProductView />} />
-        <Route path='/products' element={<Products />} />
+        <Route path='/products' element={<Products products={products}/>} />
+        <Route path='/products/:productId' element={<ProductView products={products} />} />
       </Routes>
     </div>
   );
