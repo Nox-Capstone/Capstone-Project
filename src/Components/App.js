@@ -11,6 +11,9 @@ import Register from './Register';
 const App = () => {
   const [auth, setAuth] = useState({});
   const [products, setProducts] = useState([]);
+  const [user, setUser] = useState({});
+  const [token, setToken] = useState({})
+
   const attemptLogin = () => {
     const token = window.localStorage.getItem('token');
     if (token) {
@@ -24,13 +27,16 @@ const App = () => {
         }
       )
         .then(response => response.json())
-        .then(user => setAuth(user));
+        .then(user => setAuth(user))
+        .then(user => setUser(user));
     }
   };
+
   const getProducts = async () => {
     const allProducts = await fetchProducts();
     setProducts(allProducts)
   }
+
   useEffect(() => {
     attemptLogin();
     getProducts();
@@ -42,7 +48,7 @@ const App = () => {
   }
 
   const login = async ({ username, password }) => {
-    fetch(
+    await fetch(
       '/api/auth/',
       {
         method: 'POST',
@@ -76,6 +82,7 @@ const App = () => {
             </>
           ) : (
             <>
+              { user.isAdam ? <Link to='/admin'>Admin</Link> : null }
               <Link to='/register'>Register</Link>
               <Link to='/login'>Login</Link>
               <Link to='/products'>Products</Link>

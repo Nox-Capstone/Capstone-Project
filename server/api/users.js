@@ -2,15 +2,16 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-const { getUser, createUser } = require("../db/User");
+const { getUser, createUser, getUserByUsername } = require("../db/User");
 const { requireUserPass } = require("./utils");
 
 // POST /api/users/register
 router.post('/register', async (req, res, next) => {
     try {
         const {username, password} = req.body;
-        const newUser = await createUser({username, password});
-        if (newUser){
+        const _user = await getUserByUsername(username);
+
+        if (_user){
             res.send({
                 error: "Error",
                 name: "Registration Error",
@@ -23,6 +24,7 @@ router.post('/register', async (req, res, next) => {
                 message: "Password is less than 8 charactors"
             });
         } else {
+            const newUser = await createUser({username, password});
             const token = jwt.sign({ id: newUser.id, username: newUser.username}, process.env.JWT_SECRET);
             res.send({
                 newUser,
@@ -61,5 +63,8 @@ router.post('/login', requireUserPass, async (req, res, next) => {
         throw err;
     }
 });
+
+
+
 
 module.exports = router;

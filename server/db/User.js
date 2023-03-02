@@ -132,7 +132,7 @@ const authenticate = async ({ username, password }) => {
     error.status = 401;
     throw error;
   }
-  return jwt.sign({ id: response.rows[0].id }, JWT);
+  return jwt.sign({ id: response.rows[0].id }, JWT_SECRET);
 }
 
 //Update and Delete functions for Tier II requirements
