@@ -9,6 +9,7 @@ module.exports = router;
 
 router.post('/', async(req, res, next)=> {
   try {
+    console.log(req.body)
     const token = await authenticate(req.body);
     res.send({ token });
   }

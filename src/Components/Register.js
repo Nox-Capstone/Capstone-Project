@@ -11,6 +11,7 @@ const Register = (props) => {
     const registerButton = async (ev) => {
         ev.preventDefault();
         const registerUser = await fetchRegister( username, password );
+        const token = window.localStorage.getItem("token");
         console.log(registerUser)
         if(registerUser.token){
             window.localStorage.setItem("token", token)

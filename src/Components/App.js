@@ -14,23 +14,23 @@ const App = () => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState({})
 
-  const attemptLogin = () => {
-    const token = window.localStorage.getItem('token');
-    if (token) {
-      fetch(
-        '/api/auth/',
-        {
-          method: 'GET',
-          headers: {
-            'authorization': token
-          }
-        }
-      )
-        .then(response => response.json())
-        .then(user => setAuth(user))
-        .then(user => setUser(user));
-    }
-  };
+  // const attemptLogin = () => {
+  //   const token = window.localStorage.getItem('token');
+  //   if (token) {
+  //     fetch(
+  //       '/api/auth/',
+  //       {
+  //         method: 'GET',
+  //         headers: {
+  //           'authorization': token
+  //         }
+  //       }
+  //     )
+  //       .then(response => response.json())
+  //       .then(user => setAuth(user))
+  //       .then(user => setUser(user));
+  //   }
+  // };
 
   const getProducts = async () => {
     const allProducts = await fetchProducts();
@@ -38,37 +38,36 @@ const App = () => {
   }
 
   useEffect(() => {
-    attemptLogin();
+    //attemptLogin();
     getProducts();
   }, []);
 
   const logout = () => {
     window.localStorage.removeItem('token');
-    setAuth({});
   }
 
-  const login = async ({ username, password }) => {
-    await fetch(
-      '/api/auth/',
-      {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-      .then(response => response.json())
-      .then((data) => {
-        if (data.token) {
-          window.localStorage.setItem('token', data.token);
-          attemptLogin();
-        }
-        else {
-          console.log(data);
-        }
-      });
-  };
+  // const login = async ({ username, password }) => {
+  //   await fetch(
+  //     '/api/auth/',
+  //     {
+  //       method: 'POST',
+  //       body: JSON.stringify({ username, password }),
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       }
+  //     }
+  //   )
+  //     .then(response => response.json())
+  //     .then((data) => {
+  //       if (data.token) {
+  //         window.localStorage.setItem('token', data.token);
+  //         attemptLogin();
+  //       }
+  //       else {
+  //         console.log(data);
+  //       }
+  //     });
+  // };
 
   return (
     <div>
@@ -82,7 +81,7 @@ const App = () => {
             </>
           ) : (
             <>
-              { user.isAdam ? <Link to='/admin'>Admin</Link> : null }
+              {/* { user.isAdam ? <Link to='/admin'>Admin</Link> : null } */}
               <Link to='/register'>Register</Link>
               <Link to='/login'>Login</Link>
               <Link to='/products'>Products</Link>
@@ -101,8 +100,8 @@ const App = () => {
 
           ) : (
             <>
-              <Route path='/register' element={<Register />} />
-              <Route path='/login' element={<Login login={login} />} />
+              <Route path='/register' element={<Register setToken={setToken} setUser={setUser}/>} />
+              <Route path='/login' element={<Login token={token} setUser={setUser} user={user} />} />
               <Route path='/products' element={<Products products={products} />} />
               <Route path='/products/:productId' element={<ProductView products={products} />} />
               <Route path='/cart' element={<Cart />} />

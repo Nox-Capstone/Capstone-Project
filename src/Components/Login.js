@@ -1,29 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { fetchLogin, fetchUser } from '../api/fetch';
 
-const Login = ({ login })=> {
+const Login = (props)=> {
+  const {token, user, setUser} = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const _login = (ev)=> {
+useEffect(() => {
+  if(!token){
+    return
+  }
+  try{
+    //fetchLogin(username,password)
+  }catch(error){
+    console.error(error);
+  }
+})
+
+  const login = async(ev)=> {
     ev.preventDefault();
-    login({ username, password });
+    const login = await fetchLogin(username,password);
+    const token = login.token;
+    window.localStorage.setItem("token",token);
+    const user = fetchUser(token);
+    setUser(user)
   };
   return (
+    <div className="logout">
+      
+      {!user.id ? (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={ _login }>
-        <input
-          placeholder='username'
-          value = { username }
-          onChange = { ev => setUsername(ev.target.value) }
+      <form className='login' onSubmit={login} >
+
+        <div className='userPass'>
+          <input
+            placeholder="username"
+            value={username}
+            onChange={(ev) => setUsername(ev.target.value)}
           />
-        <input
-          placeholder='password'
-          value={ password }
-          onChange = { ev => setPassword(ev.target.value) }
-        />
-        <button>Login</button>
+          <input
+            placeholder="password"
+            type={'password'}
+            value={password}
+            onChange={(ev) => setPassword(ev.target.value)}
+          />
+          <button disabled={!username || !password}>Login</button>
+        </div>
+        <Link to='/Register'>
+          Don't Have An Account Yet? Click Here.
+        </Link>
       </form>
+      </div>
+      ) : null}
     </div>
   );
 };
