@@ -4,8 +4,9 @@ import Login from './Login';
 import { Link, Routes, Route } from 'react-router-dom';
 import Products from './Products';
 import ProductView from './ProductView';
-
-import { fetchProducts } from '../api';
+import Cart from './Cart';
+import { fetchProducts } from '../api/fetch';
+import Register from './Register';
 
 const App = () => {
   const [auth, setAuth] = useState({});
@@ -27,8 +28,8 @@ const App = () => {
     }
   };
   const getProducts = async () => {
-      const allProducts = await fetchProducts();
-      setProducts(allProducts)
+    const allProducts = await fetchProducts();
+    setProducts(allProducts)
   }
   useEffect(() => {
     attemptLogin();
@@ -75,11 +76,13 @@ const App = () => {
             </>
           ) : (
             <>
+              <Link to='/register'>Register</Link>
               <Link to='/login'>Login</Link>
+              <Link to='/products'>Products</Link>
+              <Link to='/cart'>Cart</Link>
             </>
           )
         }
-        <Link to='/products'>Products</Link>
       </nav>
 
       <Routes>
@@ -91,12 +94,14 @@ const App = () => {
 
           ) : (
             <>
+              <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login login={login} />} />
+              <Route path='/products' element={<Products products={products} />} />
+              <Route path='/products/:productId' element={<ProductView products={products} />} />
+              <Route path='/cart' element={<Cart />} />
             </>
           )
         }
-        <Route path='/products' element={<Products products={products}/>} />
-        <Route path='/products/:productId' element={<ProductView products={products} />} />
       </Routes>
     </div>
   );

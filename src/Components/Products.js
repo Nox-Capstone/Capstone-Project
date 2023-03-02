@@ -3,7 +3,7 @@ import { Link, Routes, Route } from 'react-router-dom';
 import ProductView from './ProductView';
 
 
-const { fetchProducts } = require("../api");
+const { fetchProducts } = require("../api/fetch");
 
 const Products = () => {
     const [products, setProducts] = useState([]);

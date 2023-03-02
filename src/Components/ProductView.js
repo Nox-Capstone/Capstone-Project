@@ -7,8 +7,11 @@ const ProductView = (props) => {
     const product = products.find(product => product.id === parseInt(id));
     return (
         <div>
+            {
+                <h3><Link to={'/products'}> &#x3C; Back </Link></h3>
+            }
             <h2>{product.brand} {product.name}</h2>
-            <img src={product.image}/>
+            <img src={product.image} />
             <p>Price: ${product.price}</p>
             <p>Description: {product.description}</p>
             <p>Product Type: {product.tag}</p>

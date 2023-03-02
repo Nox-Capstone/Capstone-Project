@@ -60,9 +60,24 @@ const updateCartProduct = async ({ id, ...fields }) => {
     }
 }
 
+const deleteCartProducts = async (cartId) => {
+    try {
+        const { rows: [cart] } = await client.query(`
+        DELETE 
+        FROM cart_products
+        WHERE "cartId" = $1
+        RETURNING *
+        `, [cartId]);
+        return cart;
+    } catch (err) {
+        throw err;
+    }
+}
+
 module.exports = {
     addProductToCart,
     getCartProductsById,
     getCartProductByCart,
-    updateCartProduct
+    updateCartProduct,
+    deleteCartProducts
 }
