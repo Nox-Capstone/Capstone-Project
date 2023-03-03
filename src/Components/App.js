@@ -42,8 +42,9 @@ const App = () => {
     getProducts();
   }, []);
 
-  const logout = () => {
-    window.localStorage.removeItem('token');
+  const logout = async (ev) => {
+    window.localStorage.removeItem("token", token)
+    setUser({})
   }
 
   // const login = async ({ username, password }) => {
@@ -69,25 +70,21 @@ const App = () => {
   //     });
   // };
 
+
   return (
     <div>
       <h1>FS UNI App Template</h1>
       <nav>
         {
-          auth.id ? (
-            <>
-              <Link to='/'>Home</Link>
-              <button onClick={logout}>Logout {auth.username}</button>
-            </>
-          ) : (
-            <>
-              {/* { user.isAdam ? <Link to='/admin'>Admin</Link> : null } */}
-              <Link to='/register'>Register</Link>
-              <Link to='/login'>Login</Link>
-              <Link to='/products'>Products</Link>
-              <Link to='/cart'>Cart</Link>
-            </>
-          )
+
+          <>
+            {user.isAdam ? <Link to='/admin'>Admin</Link> : null}
+            <Link to='/register'>Register</Link>
+            {user.username ? <button onClick={logout}>Logout</button> : <Link to='/login'>Login</Link>}
+            <Link to='/products'>Products</Link>
+            <Link to='/cart'>Cart</Link>
+          </>
+
         }
       </nav>
 
@@ -100,7 +97,7 @@ const App = () => {
 
           ) : (
             <>
-              <Route path='/register' element={<Register setToken={setToken} setUser={setUser}/>} />
+              <Route path='/register' element={<Register setToken={setToken} setUser={setUser} />} />
               <Route path='/login' element={<Login token={token} setUser={setUser} user={user} />} />
               <Route path='/products' element={<Products products={products} />} />
               <Route path='/products/:productId' element={<ProductView products={products} />} />

@@ -26,6 +26,10 @@ const Login = (props)=> {
     setUser(user)
   };
 
+  const logout = async(ev)=>{
+    ev.preventDefault();
+    window.localStorage.removeItem("token",token)
+  }
     return (
       <div className="logout">
         

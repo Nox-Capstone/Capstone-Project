@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-import ProductView from './ProductView';
 
 
-const { fetchProducts } = require("../api/fetch");
-
-const Products = () => {
-    const [products, setProducts] = useState([]);
-    const getProducts = async () => {
-        const allProducts = await fetchProducts();
-        setProducts(allProducts)
-    }
-
-    useEffect(() => {
-        getProducts();
-    }, []);
+const Products = (props) => {
+    const {products} = props
 
     return (
         <div>
@@ -43,9 +32,6 @@ const Products = () => {
                     })
                 }
             </ul>
-            <Routes>
-                <Route path='/products/:productId' element={<ProductView product={products} />} />
-            </Routes>
         </div>
     )
 }
