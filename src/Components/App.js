@@ -73,13 +73,13 @@ const App = () => {
 
   return (
     <div>
-      <h1>FS UNI App Template</h1>
+      <h1>Nox PC Builder</h1>
       <nav>
         {
 
           <>
             {user.isAdam ? <Link to='/admin'>Admin</Link> : null}
-            <Link to='/register'>Register</Link>
+            {user.username ? null : <Link to='/register'>Register</Link>}
             {user.username ? <button onClick={logout}>Logout</button> : <Link to='/login'>Login</Link>}
             <Link to='/products'>Products</Link>
             <Link to='/cart'>Cart</Link>
@@ -101,7 +101,7 @@ const App = () => {
               <Route path='/login' element={<Login token={token} setUser={setUser} user={user} />} />
               <Route path='/products' element={<Products products={products} />} />
               <Route path='/products/:productId' element={<ProductView products={products} />} />
-              <Route path='/cart' element={<Cart />} />
+              <Route path='/cart' element={<Cart user={user} />} />
             </>
           )
         }

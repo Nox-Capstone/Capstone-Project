@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import AddToCart from './AddToCart';
 
 const ProductView = (props) => {
     const products = props.products;
@@ -16,6 +17,9 @@ const ProductView = (props) => {
             <p>Description: {product.description}</p>
             <p>Product Type: {product.tag}</p>
             <p>Quantity: {product.quantity}</p>
+            <div>
+                <AddToCart productId={id}  />
+            </div>
         </div>
     )
 }

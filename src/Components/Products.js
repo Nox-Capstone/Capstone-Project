@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-
-
+import { addToCart } from '../api/fetch'
 const Products = (props) => {
-    const {products} = props
-
+    const { products } = props
+    
     return (
         <div>
             <h1>

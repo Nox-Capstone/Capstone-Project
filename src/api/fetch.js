@@ -18,7 +18,6 @@ const fetchLogin = async (username, password) => {
     }
 }
 
-
 const fetchRegister = async (username, password) => {
     try {
         const response = await fetch(
@@ -69,6 +68,7 @@ const fetchProductsById = async (id) => {
         console.err(err)
     }
 }
+
 const fetchUser = async (token) => {
     try {
         const response = await fetch(`/api/users/me`, {
@@ -83,10 +83,34 @@ const fetchUser = async (token) => {
         console.error(error);
     }
 }
+
+const addToCart = async ({ token, productId, cartId, quantity }) => {
+    try {
+        const response = await fetch(`api/cart_products`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                cartId,
+                productId,
+                quantity
+            })
+        })
+        const result = await response.json()
+        console.log(result, 'in fetch addToCart')
+        return result;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 module.exports = {
     fetchProducts,
     fetchProductsById,
     fetchRegister,
     fetchLogin,
-    fetchUser
+    fetchUser,
+    addToCart
 }

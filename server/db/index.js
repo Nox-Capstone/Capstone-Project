@@ -4,7 +4,7 @@ const {
   createUser,
   authenticate
 } = require('./User');
-const {createProduct} = require('./Products');
+const { createProduct } = require('./Products');
 const dropTables = async () => {
   const SQL = `
   DROP TABLE IF EXISTS reviews;
@@ -91,6 +91,8 @@ const createInitialUsers = async () => {
       { username: "Prof", password: "Pradaroundmyneck420", isAdam: "false" },
       { username: "Adam", password: "IsAdam8", isAdam: "false" },
       { username: "Daniel", password: "Theboywholived5", isAdam: "false" },
+      { username: "Ithndr", password: "password", isAdam: "true" },
+      { username: "Sid", password: "asdf1234", isAdam: "true" }
     ]
     const users = await Promise.all(usersToCreate.map(createUser))
     console.log(users)
@@ -122,7 +124,7 @@ const createInitialProducts = async () => {
       { name: "X670 GAMING X AX", description: "silicon", price: "337", quantity: "64", brand: "Gigabyte", tag: "motherboard" },
       { name: "MAG Z390 TOMAHAWK", description: "silicon", price: "311", quantity: "78", brand: "MSI", tag: "motherboard" },
       //processors
-      
+
       { name: "Ryzen 7 5800X", description: "Dont bend my pins", price: "208", quantity: "64", brand: "AMD", tag: "processor" },
       { name: "Ryzen 5 5600X", description: "Dont bend my pins", price: "158", quantity: "124", brand: "AMD", tag: "processor" },
       { name: "Core i9-13900K", description: "Dont bend my pins", price: "559", quantity: "92", brand: "Intel", tag: "processor" },
