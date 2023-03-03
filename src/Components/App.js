@@ -12,7 +12,7 @@ const App = () => {
   const [auth, setAuth] = useState({});
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState({});
-  const [token, setToken] = useState({})
+  const [token, setToken] = useState(null)
 
   // const attemptLogin = () => {
   //   const token = window.localStorage.getItem('token');

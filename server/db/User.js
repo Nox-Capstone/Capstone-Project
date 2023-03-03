@@ -36,6 +36,7 @@ const getUserByToken = async (token) => {
 }
 
 const getUserByUsername = async (username) => {
+  
   try {
     const { rows: [user] } = await client.query(`
   SELECT * FROM users
