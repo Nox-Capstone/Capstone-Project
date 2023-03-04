@@ -4,8 +4,11 @@ import AddToCart from './AddToCart';
 
 const ProductView = (props) => {
     const products = props.products;
+    const cartId = 'cart placeholder'
     const id = useParams().productId;
     const product = products.find(product => product.id === parseInt(id));
+    console.log(product);
+    const productsId = product.id
     return (
         <div>
             {
@@ -18,7 +21,7 @@ const ProductView = (props) => {
             <p>Product Type: {product.tag}</p>
             <p>Quantity: {product.quantity}</p>
             <div>
-                <AddToCart productId={id}  />
+                <AddToCart productsId={productsId} cartId={cartId} />
             </div>
         </div>
     )

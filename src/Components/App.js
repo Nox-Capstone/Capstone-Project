@@ -7,6 +7,7 @@ import ProductView from './ProductView';
 import Cart from './Cart';
 import { fetchProducts } from '../api/fetch';
 import Register from './Register';
+import AdminDash from './AdminDash';
 
 const App = () => {
   const [auth, setAuth] = useState({});
@@ -102,6 +103,7 @@ const App = () => {
               <Route path='/products' element={<Products products={products} />} />
               <Route path='/products/:productId' element={<ProductView products={products} />} />
               <Route path='/cart' element={<Cart user={user} />} />
+              <Route path='/admin' element={<AdminDash />} />
             </>
           )
         }
