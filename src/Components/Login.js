@@ -1,37 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchLogin, fetchUser } from '../api/fetch';
+import { fetchLogin, fetchUser, createCart, fetchCartByUserId } from '../api/fetch';
 
-const Login = (props)=> {
-  const {token, user, setUser} = props;
+const Login = (props) => {
+  const { token, user, setUser, cart, setCart } = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const userId = user.id;
+  const assignCart = async (token, id) => {
+    const cart = await createCart({token, id})
+    setCart(cart)
+  }
+  const getCart = async(id) =>{
+    const cart = await fetchCartByUserId(id)
+    setCart(cart)
+  }
 
-  // useEffect(async () => {
-  //   try {
-  //     const user = await fetchUser(token);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, [])
-
-  const login = async(ev)=> {
+  const login = async (ev) => {
     ev.preventDefault();
-    const login = await fetchLogin(username,password);
+    const login = await fetchLogin(username, password);
     const token = login.token;
-    console.log(token)
-    window.localStorage.setItem("token",token);
+    window.localStorage.setItem("token", token);
     const user = await fetchUser(token);
     console.log("line 20 user", user)
     setUser(user)
+    try{
+      const cart = await getCart(userId)
+      if(!cart){
+        cart = await assignCart({token, userId})
+      }
+      return cart;
+    }catch(error){
+      console.log("didnt find a cart")
+    }
   };
 
-    return (
-      <div className="logout">
-        
+  return (
+    <div className="logout">
+
       <div>
         <form className='login' onSubmit={login} >
-  
+
           <div className='userPass'>
             <input
               placeholder="username"
@@ -50,9 +59,9 @@ const Login = (props)=> {
             Don't Have An Account Yet? Click Here.
           </Link>
         </form>
-        </div>
       </div>
-    );  
+    </div>
+  );
 };
 
 export default Login;
