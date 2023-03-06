@@ -1,75 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
+import { fetchProducts, createCart } from '../api/fetch';
+import Cart from './Cart';
 import Home from './Home';
 import Login from './Login';
-import { Link, Routes, Route } from 'react-router-dom';
+import Register from './Register';
 import Products from './Products';
 import ProductView from './ProductView';
-import Cart from './Cart';
-import { fetchProducts } from '../api/fetch';
-import Register from './Register';
 
 const App = () => {
   const [auth, setAuth] = useState({});
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState({});
   const [token, setToken] = useState(null)
-
-  // const attemptLogin = () => {
-  //   const token = window.localStorage.getItem('token');
-  //   if (token) {
-  //     fetch(
-  //       '/api/auth/',
-  //       {
-  //         method: 'GET',
-  //         headers: {
-  //           'authorization': token
-  //         }
-  //       }
-  //     )
-  //       .then(response => response.json())
-  //       .then(user => setAuth(user))
-  //       .then(user => setUser(user));
-  //   }
-  // };
+  const [cart, setCart] = useState({});
+  const userId = user.id;
 
   const getProducts = async () => {
     const allProducts = await fetchProducts();
     setProducts(allProducts)
   }
 
+  const assignCart = async (token, id) => {
+    const cart = await createCart(token, id)
+    setCart(cart)
+  }
   useEffect(() => {
-    //attemptLogin();
+    setToken(window.localStorage.getItem("token", token))
     getProducts();
   }, []);
+
+  useEffect(() => {
+    assignCart({ token, userId })
+  }, [token]);
 
   const logout = async (ev) => {
     window.localStorage.removeItem("token", token)
     setUser({})
   }
-
-  // const login = async ({ username, password }) => {
-  //   await fetch(
-  //     '/api/auth/',
-  //     {
-  //       method: 'POST',
-  //       body: JSON.stringify({ username, password }),
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       }
-  //     }
-  //   )
-  //     .then(response => response.json())
-  //     .then((data) => {
-  //       if (data.token) {
-  //         window.localStorage.setItem('token', data.token);
-  //         attemptLogin();
-  //       }
-  //       else {
-  //         console.log(data);
-  //       }
-  //     });
-  // };
-
 
   return (
     <div>
@@ -99,9 +67,9 @@ const App = () => {
             <>
               <Route path='/register' element={<Register setToken={setToken} setUser={setUser} />} />
               <Route path='/login' element={<Login token={token} setUser={setUser} user={user} />} />
-              <Route path='/products' element={<Products products={products} />} />
-              <Route path='/products/:productId' element={<ProductView products={products} />} />
-              <Route path='/cart' element={<Cart user={user} />} />
+              <Route path='/products' element={<Products products={products} cart={cart} />} />
+              <Route path='/products/:productId' element={<ProductView products={products} cart={cart} />} />
+              <Route path='/cart' element={<Cart user={user} cart={cart} />} />
             </>
           )
         }

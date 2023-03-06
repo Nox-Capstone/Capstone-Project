@@ -3,7 +3,7 @@ import { addToCart } from '../api/fetch';
 
 const AddToCart = (props) => {
     const {productId, cartId} = props
-    console.log(productId, 'in addToCart')
+    console.log(productId, 'id in addToCart')
     console.log(cartId, 'in addToCart')
     const [quantity, setQuantity] = useState(1);
 

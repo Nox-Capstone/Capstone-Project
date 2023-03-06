@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchLogin, fetchUser } from '../api/fetch';
+import { fetchLogin, fetchUser, createCart } from '../api/fetch';
 
 const Login = (props)=> {
   const {token, user, setUser} = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
 
   // useEffect(async () => {
   //   try {

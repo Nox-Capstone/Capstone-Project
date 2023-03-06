@@ -12,6 +12,7 @@ const fetchLogin = async (username, password) => {
             }),
         });
         const result = await response.json();
+        window.localStorage.setItem("token", result.token)
         return result;
     } catch (error) {
         console.error(error)
@@ -94,12 +95,32 @@ const addToCart = async ({ token, productId, cartId, quantity }) => {
             },
             body: JSON.stringify({
                 cartId,
-                productId,
+                productsId: productId,
                 quantity
             })
         })
         const result = await response.json()
         console.log(result, 'in fetch addToCart')
+        return result;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const createCart = async ({ token, userId }) => {
+    try {
+        const response = await fetch(`api/cart`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                userId
+            })
+        })
+        const result = await response.json();
+        console.log(result, 'result in createCart fetch')
         return result;
     } catch (error) {
         console.error(error)
@@ -112,5 +133,6 @@ module.exports = {
     fetchRegister,
     fetchLogin,
     fetchUser,
-    addToCart
+    addToCart,
+    createCart
 }

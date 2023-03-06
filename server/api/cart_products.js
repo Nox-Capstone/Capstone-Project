@@ -4,8 +4,8 @@ const {addProductToCart} =require('../db/cart_products')
 
 router.post('/', async(req,res,next)=>{
     try{
-        const {productId, cartId, quantity} = req.body;
-        const cartProduct = await addProductToCart({productId, cartId, quantity})
+        const {productsId, cartId, quantity} = req.body;
+        const cartProduct = await addProductToCart({productsId, cartId, quantity})
         res.send(cartProduct);
     }catch(error){
         next(error)

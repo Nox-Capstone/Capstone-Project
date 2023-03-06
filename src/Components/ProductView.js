@@ -5,6 +5,9 @@ import AddToCart from './AddToCart';
 const ProductView = (props) => {
     const products = props.products;
     const id = useParams().productId;
+    const cart = props.cart
+    console.log(props)
+    console.log(id,'id in PV')
     const product = products.find(product => product.id === parseInt(id));
     return (
         <div>
@@ -18,7 +21,7 @@ const ProductView = (props) => {
             <p>Product Type: {product.tag}</p>
             <p>Quantity: {product.quantity}</p>
             <div>
-                <AddToCart productId={id}  />
+                <AddToCart productId={id} cartId={cart.id} />
             </div>
         </div>
     )
