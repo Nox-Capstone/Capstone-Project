@@ -66,7 +66,6 @@ const updateUsers = async (id, ...fields) => {
   const setString = Object.keys(fields).map(
     (key, index) => `"${key}"=$${index + 1}`
   ).join(', ');
-  // console.log(setString)
   try {
     const { rows: [updatedUser] } = await client.query(`
     UPDATE users
@@ -127,7 +126,6 @@ const authenticate = async ({ username, password }) => {
     WHERE username = $1 and password = $2
   `;
   const response = await client.query(SQL, [username, password]);
-  console.log(response);
   if (!response.rows.length) {
     const error = Error('not authorized');
     error.status = 401;

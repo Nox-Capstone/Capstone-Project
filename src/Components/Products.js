@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { addToCart } from '../api/fetch'
 const Products = (props) => {
     const { products } = props
-    
+    const navigate = useNavigate();
+    const Search = () =>{
+        return (
+        <div>
+            
+        </div>
+            )
+    }
     return (
         <div>
             <h1>
                 Products ({products.length})
+                <input 
+                placeholder='search'
+                className='searchbar'
+                onChange={(ev)=>navigate(`products/search/${ev.target.value}`)}/>
             </h1>
             <ul>
                 {

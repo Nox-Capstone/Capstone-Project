@@ -33,8 +33,6 @@ const fetchRegister = async (username, password) => {
             }
         );
         const result = await response.json();
-        console.log(response)
-        console.log(result)
         return result;
     } catch (err) {
         console.error(err);
@@ -53,7 +51,7 @@ const fetchProducts = async () => {
         return result
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
 
@@ -100,14 +98,13 @@ const addToCart = async ({ token, productId, cartId, quantity }) => {
             })
         })
         const result = await response.json()
-        console.log(result, 'in fetch addToCart')
         return result;
     } catch (error) {
         console.error(error)
     }
 }
 
-const createCart = async ({ token, userId }) => {
+const createCart = async ({token, userId}) => {
     try {
         const response = await fetch(`api/cart`, {
             method: 'POST',
@@ -116,23 +113,32 @@ const createCart = async ({ token, userId }) => {
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-                userId
+                userId: userId
             })
         })
         const result = await response.json();
-        console.log(result, 'result in createCart fetch')
         return result;
     } catch (error) {
         console.error(error)
     }
 }
 
+const fetchCartByUserId = async (userId) => {
+    try {
+        const response = await fetch(`api/cart/${userId}`, {
+            method: 'GET'
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
 module.exports = {
     fetchProducts,
     fetchProductsById,
     fetchRegister,
     fetchLogin,
     fetchUser,
+    fetchCartByUserId,
     addToCart,
     createCart
 }

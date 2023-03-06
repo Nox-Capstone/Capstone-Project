@@ -27,13 +27,9 @@ router.post('/', async (req, res, next) => {
             })
         }
         const newToken = token.slice(7);
-        const verifyToken = jwt.verify(newToken, process.env.JWT_SECRET);
-        if (verifyToken) {
-            const user = await getUserById(userId);
-            const newCart = await createCart({ userId: user.id });
-            console.log("Cart Created", newCart)
-            res.send(newCart);
-        }
+        const newCart = await createCart(newToken, userId);
+        console.log('Cart Created')
+        res.send(newCart);
 
     } catch (err) {
         next(err)
