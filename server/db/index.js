@@ -95,7 +95,6 @@ const createInitialUsers = async () => {
       { username: "Sid", password: "asdf1234", isAdam: "true" }
     ]
     const users = await Promise.all(usersToCreate.map(createUser))
-    console.log(users)
     console.log('Finished Creating Users')
   } catch (err) {
     throw err;
@@ -107,14 +106,14 @@ const createInitialProducts = async () => {
     console.log('Starting Create Products')
     const productsToCreate = [
       //graphics cards
-      { name: "GTX4090 ti", description: "big", price: "2300", quantity: "4", brand: "NVidia", tag: "graphics card" },
-      { name: "GTX4080", description: "big", price: "1500", quantity: "31", brand: "NVidia", tag: "graphics card" },
-      { name: "GTX4070 ti", description: "big", price: "800", quantity: "52", brand: "NVidia", tag: "graphics card" },
-      { name: "GTX4060 ti", description: "big", price: "500", quantity: "58", brand: "NVidia", tag: "graphics card" },
-      { name: "GTX3090 ti", description: "big", price: "1700", quantity: "7", brand: "NVidia", tag: "graphics card" },
-      { name: "GTX3080", description: "big", price: "1200", quantity: "12", brand: "NVidia", tag: "graphics card" },
-      { name: "GTX3070 ti", description: "big", price: "700", quantity: "30", brand: "NVidia", tag: "graphics card" },
-      { name: "GTX3060 ti", description: "big", price: "400", quantity: "11", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX4090 ti", description: "big", price: "2300", quantity: "4", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX4080", description: "big", price: "1500", quantity: "31", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX4070 ti", description: "big", price: "800", quantity: "52", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX4060 ti", description: "big", price: "500", quantity: "58", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX3090 ti", description: "big", price: "1700", quantity: "7", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX3080", description: "big", price: "1200", quantity: "12", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX3070 ti", description: "big", price: "700", quantity: "30", brand: "NVidia", tag: "graphics card" },
+      { name: "RTX3060 ti", description: "big", price: "400", quantity: "11", brand: "NVidia", tag: "graphics card" },
       //motherboards
       { name: "TUF GAMING X570-PLUS", description: "silicon", price: "200", quantity: "150", brand: "Asus", tag: "motherboard" },
       { name: "ROG Corsair VIII Extreme", description: "silicon", price: "1300", quantity: "64", brand: "Asus", tag: "motherboard" },
@@ -179,7 +178,6 @@ const createInitialProducts = async () => {
 
     //name,description,price,quantity,brand,tag
     const products = await Promise.all(productsToCreate.map(createProduct))
-    console.log(JSON.stringify(products, null, 2))
     console.log('Finished Creating Products')
   } catch (err) {
     throw err;

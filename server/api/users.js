@@ -43,7 +43,6 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', requireUserPass, async (req, res, next) => {
     try {
         const { username, password } = req.body;
-        console.log(req.body)
         const user = await getUserByUsername(username);
         console.log(user)
         const match = await bcrypt.compare(password, user.password)
@@ -61,7 +60,6 @@ router.post('/login', requireUserPass, async (req, res, next) => {
             }, process.env.JWT_SECRET, {
                 expiresIn: '1w'
             });
-            console.log(token)
             res.send({
                 message: "you're logged in!",
                 token,

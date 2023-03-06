@@ -12,7 +12,6 @@ const Register = (props) => {
         ev.preventDefault();
         const registerUser = await fetchRegister( username, password );
         const token = window.localStorage.getItem("token");
-        console.log(registerUser)
         if(registerUser.token){
             window.localStorage.setItem("token", token)
             setToken(registerUser.token)

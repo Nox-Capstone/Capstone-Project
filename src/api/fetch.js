@@ -12,6 +12,7 @@ const fetchLogin = async (username, password) => {
             }),
         });
         const result = await response.json();
+        window.localStorage.setItem("token", result.token)
         return result;
     } catch (error) {
         console.error(error)
@@ -32,8 +33,6 @@ const fetchRegister = async (username, password) => {
             }
         );
         const result = await response.json();
-        console.log(response)
-        console.log(result)
         return result;
     } catch (err) {
         console.error(err);
@@ -52,7 +51,7 @@ const fetchProducts = async () => {
         return result
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
 
@@ -94,23 +93,52 @@ const addToCart = async ({ token, productId, cartId, quantity }) => {
             },
             body: JSON.stringify({
                 cartId,
-                productId,
+                productsId: productId,
                 quantity
             })
         })
         const result = await response.json()
-        console.log(result, 'in fetch addToCart')
         return result;
     } catch (error) {
         console.error(error)
     }
 }
 
+const createCart = async ({token, userId}) => {
+    try {
+        const response = await fetch(`api/cart`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                userId: userId
+            })
+        })
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const fetchCartByUserId = async (userId) => {
+    try {
+        const response = await fetch(`api/cart/${userId}`, {
+            method: 'GET'
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
 module.exports = {
     fetchProducts,
     fetchProductsById,
     fetchRegister,
     fetchLogin,
     fetchUser,
-    addToCart
+    fetchCartByUserId,
+    addToCart,
+    createCart
 }
