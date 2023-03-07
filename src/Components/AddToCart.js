@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { addToCart } from '../api/fetch';
 
 const AddToCart = (props) => {
-    const {productId, cartId} = props
+    const { productId } = props
     console.log(productId, 'id in addToCart')
-    const { productsId, cartId } = props
+    const { productsId } = props
     console.log(productsId, 'in addToCart')
     console.log(cartId, 'in addToCart')
     const [quantity, setQuantity] = useState(1);

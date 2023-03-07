@@ -7,9 +7,6 @@ import Login from './Login';
 import Register from './Register';
 import Products from './Products';
 import ProductView from './ProductView';
-import Cart from './Cart';
-import { fetchProducts } from '../api/fetch';
-import Register from './Register';
 import AdminDash from './AdminDash';
 
 const App = () => {
