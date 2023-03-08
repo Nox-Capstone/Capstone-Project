@@ -147,6 +147,7 @@ const fetchCartProductByCartId = async (cartId) => {
         }
         })
         const result = await response.json();
+        console.log()
         return result;
     // }catch(error){
     //     console.error(error);

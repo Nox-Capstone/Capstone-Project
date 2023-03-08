@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-import { fetchProducts, exchangeTokenForUser } from '../api/fetch';
+import { fetchProducts, exchangeTokenForUser, fetchCartByUserId } from '../api/fetch';
 import Cart from './Cart';
 import Home from './Home';
 import Login from './Login';
@@ -24,7 +24,9 @@ const App = () => {
   const getUser = async () => {
     if(window.localStorage.getItem("token")){
       const user = await exchangeTokenForUser();
-      setUser(user)
+      const cart = await fetchCartByUserId(user.id)
+      setUser(user);
+      setCart(cart);
     } else setUser({})
   }
 

@@ -3,18 +3,21 @@ import { Link, Routes, Route } from 'react-router-dom';
 import { fetchCartProductByCartId } from '../api/fetch';
 
 const Cart = (props) => {
-    const { user, cart} = props;
+    const { user, cart } = props;
+    const token = window.localStorage.getItem("token")
+    console.log(props)
     const [cartProduct, setCartProduct] = useState({});
     
+    if (!user && !cart) {
+        return null
+    }
     const getCartProduct = async (id) =>{
         const cart = await fetchCartProductByCartId(id)
-        return cart;
+        setCartProduct(cart);
     }
-
-    useEffect(() => {
-        setCartProduct(getCartProduct(cart.id))
-    }, []);
-
+    useEffect(()=>{
+        getCartProduct(cart.id)
+    },[token])
     return (
         <div>
             <h1>{user.username ? user.username : "Guest"}'s Cart</h1>
