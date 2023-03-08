@@ -7,14 +7,21 @@ const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const getCart = async (id) => {
+    const userCart = await fetchCartByUserId(id);
+    setCart(userCart);
+    console.log(userCart);
+  };
+
   const login = async (ev) => {
     ev.preventDefault();
     const login = await fetchLogin(username, password);
     const token = login.token;
     window.localStorage.setItem("token", token);
     const user = await fetchUser(token);
-    console.log("line 20 user", user)
-    setUser(user)
+    console.log("line 20 user", user);
+    setUser(user);
+    getCart(user.id)
   };
 
   return (

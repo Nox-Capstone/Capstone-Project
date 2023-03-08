@@ -95,6 +95,8 @@ const deleteProducts = async (id) => {
     }
 }
 
+
+
 module.exports = {
     createProduct,
     getAllProducts,

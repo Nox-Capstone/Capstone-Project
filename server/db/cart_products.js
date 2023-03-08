@@ -6,6 +6,18 @@ const addProductToCart = async ({
     quantity
 }) => {
     try {
+        const {rows: [checkCart]} = await client.query(`
+            SELECT *
+            FROM cart_products
+            WHERE "cartId" = $2 AND "productsId" = $1
+        `,[cartId, productsId])
+        if(checkCart.length){
+            await client.query(`
+            UPDATE cart_products
+            SET quantity = quantity + 1
+            WHERE "cartId" = $2 AND "productsId" = $1
+            `,[cartId, productsId])
+        }
         const { rows: [cartProduct] } = await client.query(`
         INSERT INTO cart_products("productsId","cartId",quantity)
         VALUES($1,$2,$3)

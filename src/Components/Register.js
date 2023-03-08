@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchRegister } from '../api/fetch';
+import { fetchRegister, createCart } from '../api/fetch';
 
 const Register = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const {setToken, setUser} = props;
+    const {setToken, setUser ,setCart} = props;
 
+    const registerCart = async ({token, userId}) =>{
+        const cart = await createCart({token, userId});
+        return cart;
+    }
 
     const registerButton = async (ev) => {
         ev.preventDefault();
@@ -19,6 +23,10 @@ const Register = (props) => {
         if(registerUser.user){
             setUser(registerUser.user)
         }
+        const user = registerUser.newUser;
+        const userId = user.id
+        registerCart({token, userId})
+        setCart(registerCart)
     };
     return (
         <div>

@@ -20,16 +20,16 @@ const App = () => {
     const allProducts = await fetchProducts();
     setProducts(allProducts)
   }
-  const getCart = async (id) => {
-    const userCart = await fetchCartByUserId(5);
-    setCart(userCart);
-    console.log(userCart)
-  }
+
+  // const getCart = async (id) => {
+  //   const userCart = await fetchCartByUserId(5);
+  //   setCart(userCart);
+  //   console.log(userCart)
+  // }
 
   useEffect(() => {
     setToken(window.localStorage.getItem("token", token))
     getProducts()
-    getCart(user.id)
   }, []);
 
 
@@ -65,8 +65,8 @@ const App = () => {
 
           ) : (
             <>
-              <Route path='/register' element={<Register setToken={setToken} setUser={setUser} />} />
-              <Route path='/login' element={<Login token={token} setUser={setUser} user={user} />} />
+              <Route path='/register' element={<Register setToken={setToken} setUser={setUser} setCart={setCart} />} />
+              <Route path='/login' element={<Login token={token} setUser={setUser} user={user} setCart={setCart} />} />
               <Route path='/products' element={<Products products={products} cart={cart} />} />
               <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
               <Route path='/products/:productId' element={<ProductView products={products} cart={cart} />} />

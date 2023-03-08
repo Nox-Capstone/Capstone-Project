@@ -20,6 +20,7 @@ const getCartByUserId = async (userId) => {
         FROM cart
         WHERE "userId" = $1
         `, [userId])
+        console.log(cart,'cart in db cart')
         return cart;
     } catch (err) {
         throw err;

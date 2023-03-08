@@ -84,7 +84,7 @@ const fetchUser = async (token) => {
 }
 
 const addToCart = async ({ token, productId, cartId, quantity }) => {
-    try {
+    // try {
         const response = await fetch(`api/cart_products`, {
             method: 'POST',
             headers: {
@@ -99,9 +99,9 @@ const addToCart = async ({ token, productId, cartId, quantity }) => {
         })
         const result = await response.json()
         return result;
-    } catch (error) {
-        console.error(error)
-    }
+    // } catch (error) {
+    //     console.error(error)
+    // }
 }
 
 const createCart = async ({ token, userId }) => {
@@ -113,7 +113,7 @@ const createCart = async ({ token, userId }) => {
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-                userId: userId
+                userId
             })
         })
         const result = await response.json();
@@ -124,18 +124,20 @@ const createCart = async ({ token, userId }) => {
 }
 
 const fetchCartByUserId = async (userId) => {
-    // try {
+    try {
     const response = await fetch(`api/cart/${userId}`, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     const result = await response.json();
     return result;
-    // } catch (error) {
-    //     console.error(error)
-    // }
+    } catch (error) {
+        console.error(error)
+    }
 }
+
 module.exports = {
     fetchProducts,
     fetchProductsById,
