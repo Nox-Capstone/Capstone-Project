@@ -153,6 +153,20 @@ const fetchCartProductByCartId = async (cartId) => {
     }
 }
 
+const exchangeTokenForUser = async () => {
+  const token = window.localStorage.getItem("token");
+  if(token){
+    const response = await fetch(`api/users/me`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    });
+    const result = await response.json();
+    return result;
+  }  
+};
+
 module.exports = {
     fetchProducts,
     fetchProductsById,
@@ -162,5 +176,6 @@ module.exports = {
     fetchCartByUserId,
     fetchCartProductByCartId,
     addToCart,
-    createCart
+    createCart,
+    exchangeTokenForUser
 }

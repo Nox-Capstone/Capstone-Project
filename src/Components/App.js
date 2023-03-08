@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-import { fetchProducts, createCart, fetchCartByUserId } from '../api/fetch';
+import { fetchProducts, exchangeTokenForUser } from '../api/fetch';
 import Cart from './Cart';
 import Home from './Home';
 import Login from './Login';
@@ -21,17 +21,17 @@ const App = () => {
     setProducts(allProducts)
   }
 
-  // const getCart = async (id) => {
-  //   const userCart = await fetchCartByUserId(5);
-  //   setCart(userCart);
-  //   console.log(userCart)
-  // }
+  const getUser = async () => {
+    if(window.localStorage.getItem("token")){
+      const user = await exchangeTokenForUser();
+      setUser(user)
+    } else setUser({})
+  }
 
   useEffect(() => {
-    setToken(window.localStorage.getItem("token", token))
-    getProducts()
+    getUser();
+    getProducts();
   }, []);
-
 
   const logout = async (ev) => {
     window.localStorage.removeItem("token", token)
@@ -60,7 +60,7 @@ const App = () => {
         {
           auth.id ? (
             <>
-              <Route path='/' element={<Home auth={auth} />} />
+              <Route path='/' element={<Home />} />
             </>
 
           ) : (

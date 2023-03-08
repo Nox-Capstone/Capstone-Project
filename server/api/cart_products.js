@@ -13,7 +13,8 @@ router.post('/', async(req,res,next)=>{
 })
 
 router.get('/:id', async(req,res,next)=>{
-    const {id} = req.params;
+    const { id } = req.params;
+    
     try{
         const cartProduct = await getCartProductByCart(id);
         res.send(cartProduct);

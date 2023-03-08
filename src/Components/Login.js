@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchLogin, fetchUser, createCart, fetchCartByUserId } from '../api/fetch';
+import { fetchLogin, fetchUser, fetchCartByUserId } from '../api/fetch';
 
 const Login = (props) => {
   const { token, user, setUser, cart, setCart } = props;
