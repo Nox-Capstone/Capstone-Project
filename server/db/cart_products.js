@@ -6,7 +6,7 @@ const addProductToCart = async ({
     quantity
 }) => {
     try {
-        const {rows: [checkCart]} = await client.query(`
+        const checkCart = await client.query(`
             SELECT *
             FROM cart_products
             WHERE "cartId" = $2 AND "productsId" = $1

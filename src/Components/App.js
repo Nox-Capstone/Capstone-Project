@@ -70,7 +70,7 @@ const App = () => {
               <Route path='/products' element={<Products products={products} cart={cart} />} />
               <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
               <Route path='/products/:productId' element={<ProductView products={products} cart={cart} />} />
-              <Route path='/cart' element={<Cart user={user} />} />
+              <Route path='/cart' element={<Cart user={user} cart={cart} />} />
               <Route path='/admin' element={<AdminDash />} />
             </>
           )

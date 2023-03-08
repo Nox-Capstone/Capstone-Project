@@ -84,24 +84,24 @@ const fetchUser = async (token) => {
 }
 
 const addToCart = async ({ token, productId, cartId, quantity }) => {
-    // try {
-        const response = await fetch(`api/cart_products`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                cartId,
-                productsId: productId,
-                quantity
-            })
+    try {
+    const response = await fetch(`api/cart_products`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            cartId,
+            productsId: productId,
+            quantity
         })
-        const result = await response.json()
-        return result;
-    // } catch (error) {
-    //     console.error(error)
-    // }
+    })
+    const result = await response.json()
+    return result;
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 const createCart = async ({ token, userId }) => {
@@ -125,16 +125,31 @@ const createCart = async ({ token, userId }) => {
 
 const fetchCartByUserId = async (userId) => {
     try {
-    const response = await fetch(`api/cart/${userId}`, {
+        const response = await fetch(`api/cart/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const fetchCartProductByCartId = async (cartId) => {
+    try{
+        const response = await fetch(`api/cart_products/${cartId}`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
-    })
-    const result = await response.json();
-    return result;
-    } catch (error) {
-        console.error(error)
+        })
+        const result = await response.json();
+        return result;
+    }catch(error){
+        console.error(error);
     }
 }
 
@@ -145,6 +160,7 @@ module.exports = {
     fetchLogin,
     fetchUser,
     fetchCartByUserId,
+    fetchCartProductByCartId,
     addToCart,
     createCart
 }
