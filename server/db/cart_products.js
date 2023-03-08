@@ -15,12 +15,13 @@ const addProductToCart = async ({
             await client.query(`
             UPDATE cart_products
             SET quantity = quantity + 1
-            WHERE "cartId" = $2 AND "productsId" = $1
+            WHERE "cartId" = $2 AND "productsId" = $1 
             `,[cartId, productsId])
         }
         const { rows: [cartProduct] } = await client.query(`
         INSERT INTO cart_products("productsId","cartId",quantity)
         VALUES($1,$2,$3)
+        ON CONFLICT ("cartId","productsId") DO NOTHING
         RETURNING *
         `, [productsId, cartId, quantity])
         return cartProduct;
