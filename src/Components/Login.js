@@ -15,15 +15,6 @@ const Login = (props) => {
     const user = await fetchUser(token);
     console.log("line 20 user", user)
     setUser(user)
-    try {
-      const cart = await getCart(userId)
-      if (!cart) {
-        cart = await assignCart({ token, userId })
-      }
-      return cart;
-    } catch (error) {
-      console.log("didnt find a cart")
-    }
   };
 
   return (

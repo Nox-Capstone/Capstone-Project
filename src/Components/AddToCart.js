@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { addToCart } from '../api/fetch';
 
 const AddToCart = (props) => {
-    const { productId } = props
+    const { productId, cartId } = props
     console.log(productId, 'id in addToCart')
-    const { productsId } = props
-    console.log(productsId, 'in addToCart')
     console.log(cartId, 'in addToCart')
     const [quantity, setQuantity] = useState(1);
 
     const handleSubmit = async () => {
         try {
-            const addProduct = await addToCart({ productsId, cartId, quantity })
+            const addProduct = await addToCart({ productId, cartId, quantity })
             console.log(addProduct, 'added to cart')
         } catch (error) {
             console.error(error)

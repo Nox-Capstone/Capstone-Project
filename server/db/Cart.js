@@ -1,27 +1,27 @@
 const client = require('./client');
 
-const createCart = async (userId) =>{
-    try{
+const createCart = async (userId) => {
+    try {
         const cart = await client.query(`
-        INSERT INTO cart
+        INSERT INTO cart("userId")
         VALUES($1)
         RETURNING *
-        `,[userId])
+        `, [userId])
         return cart;
-    }catch(err){
+    } catch (err) {
         throw err;
     }
 }
 
-const getCartByUserId = async(userId)=>{
-    try{
-        const {rows:[cart]} = await client.query(`
+const getCartByUserId = async (userId) => {
+    try {
+        const { rows: [cart] } = await client.query(`
         SELECT *
         FROM cart
         WHERE "userId" = $1
-        `,[id])
+        `, [userId])
         return cart;
-    }catch(err){
+    } catch (err) {
         throw err;
     }
 }

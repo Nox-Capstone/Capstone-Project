@@ -5,7 +5,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 //This is api/cart
-router.get('/id', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     const { userId } = req.body;
     try {
         const cart = await getCartByUserId(userId);
@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
             })
         }
         const newToken = token.slice(7);
-        const newCart = await createCart(newToken, userId);
+        const newCart = await createCart(userId);
         console.log('Cart Created')
         res.send(newCart);
 

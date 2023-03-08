@@ -104,7 +104,7 @@ const addToCart = async ({ token, productId, cartId, quantity }) => {
     }
 }
 
-const createCart = async ({token, userId}) => {
+const createCart = async ({ token, userId }) => {
     try {
         const response = await fetch(`api/cart`, {
             method: 'POST',
@@ -124,13 +124,17 @@ const createCart = async ({token, userId}) => {
 }
 
 const fetchCartByUserId = async (userId) => {
-    try {
-        const response = await fetch(`api/cart/${userId}`, {
-            method: 'GET'
-        })
-    } catch (error) {
-        console.error(error)
-    }
+    // try {
+    const response = await fetch(`api/cart/${userId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const result = await response.json();
+    return result;
+    // } catch (error) {
+    //     console.error(error)
+    // }
 }
 module.exports = {
     fetchProducts,

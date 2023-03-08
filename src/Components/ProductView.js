@@ -7,11 +7,11 @@ const ProductView = (props) => {
     // const cartId = 'cart placeholder'
     const id = useParams().productId;
     const cart = props.cart
-    console.log(cart.id)
+    console.log(cart)
     const product = products.find(product => product.id === parseInt(id));
-    if(!product){
+    if (!product) {
         return null
-        }
+    }
     return (
         <div>
             {

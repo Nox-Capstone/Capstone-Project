@@ -5,6 +5,7 @@ const {
   authenticate
 } = require('./User');
 const { createProduct } = require('./Products');
+const { createCart } = require('./Cart')
 const dropTables = async () => {
   const SQL = `
   DROP TABLE IF EXISTS reviews;
@@ -39,7 +40,7 @@ const syncTables = async () => {
   );
   CREATE TABLE cart (
     id SERIAL PRIMARY KEY,
-    current BOOLEAN DEFAULT TRUE,
+    is_active BOOLEAN DEFAULT true,
     "userId" INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
   CREATE TABLE cart_products(
@@ -72,34 +73,73 @@ const syncTables = async () => {
 const syncAndSeed = async () => {
   await dropTables();
   await syncTables();
-  await createInitialUsers();
+  await createInitialUsersAndCarts();
   await createInitialProducts();
 
 };
 
-const createInitialUsers = async () => {
+const createInitialUsersAndCarts = async () => {
   try {
     console.log('Starting Create Users')
-    const usersToCreate = [
-      { username: "Walter", password: "Waltersux69", isAdam: "true" },
-      { username: "Ethan", password: "Deadbattery1", isAdam: "true" },
-      { username: "Michael", password: "GBAshouldntbelockedbehindapaywall", isAdam: "true" },
-      { username: "Eric", password: "Pokemonboi1", isAdam: "false" },
-      { username: "Jacob", password: "Hoodielover1", isAdam: "false" },
-      { username: "Nabeel", password: "Thegoat9", isAdam: "false" },
-      { username: "Anthony", password: "Nintendofan9", isAdam: "false" },
-      { username: "Prof", password: "Pradaroundmyneck420", isAdam: "false" },
-      { username: "Adam", password: "IsAdam8", isAdam: "false" },
-      { username: "Daniel", password: "Theboywholived5", isAdam: "false" },
-      { username: "Ithndr", password: "password", isAdam: "true" },
-      { username: "Sid", password: "asdf1234", isAdam: "true" }
-    ]
-    const users = await Promise.all(usersToCreate.map(createUser))
-    console.log('Finished Creating Users')
+    const [ethan, prof, adam, daniel, ithndr, sid] =
+      await Promise.all([
+        createUser({
+          username: 'Ethan',
+          password: 'Deadbattery1',
+          isAdam: true,
+        }),
+        createUser({
+          username: 'Prof',
+          password: 'Pradaroundmyneck420',
+          isAdam: false,
+        }),
+        createUser({
+          username: 'Adam',
+          password: 'IsAdam8',
+          isAdam: false,
+        }),
+        createUser({
+          username: 'Daniel',
+          password: 'Theboywholived5',
+          isAdam: false,
+        }),
+        createUser({
+          username: 'Ithndr',
+          password: 'password',
+          isAdam: true,
+        }),
+        createUser({
+          username: 'Sid',
+          password: 'asdf1234',
+          isAdam: true,
+        }),
+      ]);
+    console.log('Finished Creating Users');
+    const [ethanCart, profCart, adamCart, danielCart, ithndrCart, sidCart] = await Promise.all([
+      createCart(ethan.id),
+      createCart(prof.id),
+      createCart(adam.id),
+      createCart(daniel.id),
+      createCart(ithndr.id),
+      createCart(sid.id),
+    ]);
+
+
   } catch (err) {
     throw err;
   }
 }
+
+// const createInitialCart = () => {
+//   try {
+//     console.log('Creating Carts for Users');
+//     const cartsToCreate = [
+
+//     ]
+//   } catch (err) {
+//     throw err;
+//   }
+// }
 
 const createInitialProducts = async () => {
   try {
@@ -173,7 +213,6 @@ const createInitialProducts = async () => {
       { name: "UNI SL120 3-pack", description: "120mm", price: "80", quantity: "23", brand: "Lian Li", tag: "case fan" },
       { name: "Ax25 chromax", description: "120mm", price: "32", quantity: "150", brand: "Noctua", tag: "case fan" },
       { name: "P12", description: "120mm", price: "15", quantity: "354", brand: "ARCTIC", tag: "case fan" },
-
     ]
 
     //name,description,price,quantity,brand,tag
