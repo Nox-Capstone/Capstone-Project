@@ -83,6 +83,12 @@ const fetchUser = async (token) => {
     }
 }
 
+const fetchAllUsers = async () => {
+    const response = await fetch(`/api/users`);
+    const result = await response.json();
+    return result;
+}
+
 const addToCart = async ({ token, productId, cartId, quantity }) => {
     try {
     const response = await fetch(`api/cart_products`, {
@@ -174,6 +180,7 @@ module.exports = {
     fetchRegister,
     fetchLogin,
     fetchUser,
+    fetchAllUsers,
     fetchCartByUserId,
     fetchCartProductByCartId,
     addToCart,

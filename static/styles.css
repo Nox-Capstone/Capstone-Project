@@ -17,13 +17,15 @@ nav {
 }
 
 .adminDash {
-  
+  display: flex;
+  flex-direction: column;
   background-color: rgb(93, 97, 95);
 }
 
 .adminUsersProducts {
   background-color: brown;
   display: flex;
+  justify-content: space-between;
 }
 
 .adminProducts {
