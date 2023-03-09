@@ -1,30 +1,37 @@
+const { getCartByCartId } = require('./Cart');
 const client = require('./client');
 
 const addProductToCart = async ({
     productsId,
     cartId,
-    quantity
+    quantity = 1
 }) => {
     try {
         const checkCart = await client.query(`
             SELECT *
             FROM cart_products
             WHERE "cartId" = $2 AND "productsId" = $1
-        `,[cartId, productsId])
-        if(checkCart.length){
+        `, [productsId, cartId])
+        console.log(checkCart.rows)
+        if (checkCart.rows.length) {
             await client.query(`
             UPDATE cart_products
-            SET quantity = quantity + 1
+            SET quantity = quantity + $3
             WHERE "cartId" = $2 AND "productsId" = $1 
-            `,[cartId, productsId])
+            `, [productsId, cartId, quantity])
+            const cart = await getCartByCartId(cartId)
+            return cart;
         }
-        const { rows: [cartProduct] } = await client.query(`
+        else {
+            await client.query(`
         INSERT INTO cart_products("productsId","cartId",quantity)
         VALUES($1,$2,$3)
         ON CONFLICT ("cartId","productsId") DO NOTHING
         RETURNING *
         `, [productsId, cartId, quantity])
-        return cartProduct;
+            const cart = await getCartByCartId(cartId)
+            return cart;
+        }
     } catch (err) {
         throw err;
     }

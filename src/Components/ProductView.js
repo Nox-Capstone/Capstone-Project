@@ -6,7 +6,7 @@ const ProductView = (props) => {
     const products = props.products;
     // const cartId = 'cart placeholder'
     const id = useParams().productId;
-    const cart = props.cart
+    const {cart, setCart} = props
     console.log(cart)
     const product = products.find(product => product.id === parseInt(id));
     if (!product) {
@@ -24,7 +24,7 @@ const ProductView = (props) => {
             <p>Product Type: {product.tag}</p>
             <p>Quantity: {product.quantity}</p>
             <div>
-                <AddToCart productId={id} cartId={cart.id} />
+                <AddToCart productId={id} cartId={cart.id} setCart={setCart} />
             </div>
         </div>
     )
