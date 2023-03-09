@@ -15,3 +15,30 @@ nav {
   display: flex;
   justify-content: space-around;
 }
+
+.adminDash {
+  
+  background-color: rgb(93, 97, 95);
+}
+
+.adminUsersProducts {
+  background-color: brown;
+  display: flex;
+}
+
+.adminProducts {
+  border: 1px solid black;
+  margin: 8px;
+  padding: 8px;
+  background-color: rgb(162, 161, 161);
+  max-width: 40rem;
+}
+
+.adminUsers {
+  border: 1px solid black;
+  margin: 8px;
+  padding: 8px;
+  background-color: rgb(162, 161, 161);
+  max-width: 40rem;
+  min-width: 40rem;
+}
