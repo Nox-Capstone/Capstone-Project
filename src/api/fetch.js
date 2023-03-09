@@ -145,7 +145,7 @@ const fetchCartByUserId = async (userId) => {
 }
 
 const fetchCartProductByCartId = async (cartId) => {
-    // try{
+    try{
         const response = await fetch(`api/cart_products/${cartId}`,{
         method: 'GET',
         headers: {
@@ -155,9 +155,9 @@ const fetchCartProductByCartId = async (cartId) => {
         const result = await response.json();
         console.log()
         return result;
-    // }catch(error){
-    //     console.error(error);
-    // }
+    }catch(error){
+        console.error(error);
+    }
 }
 
 const exchangeTokenForUser = async () => {
