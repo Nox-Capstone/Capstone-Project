@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-import { fetchProducts, exchangeTokenForUser, fetchCartByUserId } from '../api/fetch';
+import { fetchProducts, exchangeTokenForUser, fetchCartByUserId, fetchAllUsers } from '../api/fetch';
 import Cart from './Cart';
 import Home from './Home';
 import Login from './Login';
@@ -15,11 +15,19 @@ const App = () => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(null)
   const [cart, setCart] = useState({});
+  const [allUsers, setAllUsers] = useState([]);
 
   const getProducts = async () => {
     const allProducts = await fetchProducts();
     setProducts(allProducts)
   }
+
+  //New function for getting and setting all users
+  const getAllUsers = async () => {
+    const allUsers = await fetchAllUsers();
+    setAllUsers(allUsers);
+  }
+  
 
   const getUser = async () => {
     if(window.localStorage.getItem("token")){
@@ -33,6 +41,7 @@ const App = () => {
   useEffect(() => {
     getUser();
     getProducts();
+    getAllUsers();
   }, []);
 
   const logout = async (ev) => {
@@ -73,7 +82,7 @@ const App = () => {
               <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
               <Route path='/products/:productId' element={<ProductView products={products} cart={cart} />} />
               <Route path='/cart' element={<Cart user={user} cart={cart} />} />
-              <Route path='/admin' element={<AdminDash products={products}/>} />
+              <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers}/>} />
             </>
           )
         }

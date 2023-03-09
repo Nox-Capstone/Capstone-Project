@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 
-const { getUser, createUser, getUserByUsername } = require("../db/User");
+const { createUser, getUserByUsername, getAllUsers } = require("../db/User");
 const { requireUserPass } = require("./utils");
 
 // POST /api/users/register
@@ -91,6 +91,22 @@ router.get('/me', async (req, res, next) => {
         next(error);
     }
 })
+
+router.get('/', async (req, res, next) => {
+    try {
+        const users = await getAllUsers();
+        if(users){
+            res.send(users)
+        } else {
+            next({
+                name:'getUsersError',
+                message: 'Failed to retrieve all users'
+            });
+        };
+    } catch (err) {
+        next(err);
+    }
+});
 
 
 
