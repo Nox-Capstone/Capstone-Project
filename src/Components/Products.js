@@ -25,7 +25,7 @@ const Products = (props) => {
                     products.map(product => {
                         return (
                             <li key={product.id}>
-                                <Link to={`/products/${product.id}`} >{product.name}</Link>
+                                <Link to={`/products/${product.id}`} >{product.brand} {product.name}</Link>
                                 <ul>
                                     <li>
                                         Price: ${product.price}
