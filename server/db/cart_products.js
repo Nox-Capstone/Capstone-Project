@@ -12,7 +12,7 @@ const addProductToCart = async ({
             FROM cart_products
             WHERE "cartId" = $2 AND "productsId" = $1
         `, [productsId, cartId])
-        console.log(checkCart.rows)
+        
         if (checkCart.rows.length) {
             await client.query(`
             UPDATE cart_products
@@ -24,10 +24,10 @@ const addProductToCart = async ({
         }
         else {
             await client.query(`
-        INSERT INTO cart_products("productsId","cartId",quantity)
-        VALUES($1,$2,$3)
-        ON CONFLICT ("cartId","productsId") DO NOTHING
-        RETURNING *
+            INSERT INTO cart_products("productsId","cartId", quantity)
+            VALUES($1,$2,$3)
+            ON CONFLICT ("cartId","productsId") DO NOTHING
+            RETURNING *
         `, [productsId, cartId, quantity])
             const cart = await getCartByCartId(cartId)
             return cart;
@@ -35,6 +35,16 @@ const addProductToCart = async ({
     } catch (err) {
         throw err;
     }
+}
+
+const deleteProductFromCartProducts = async ({
+    productsId,
+    cartId
+}) => {
+    await client.query(`
+        DELETE FROM cart_products
+        WHERE "productsId" = $1 AND "cartId" = $2
+    `, [productsId, cartId]);
 }
 
 const getCartProductsById = async (id) => {
@@ -96,6 +106,7 @@ const deleteCartProducts = async (cartId) => {
 
 module.exports = {
     addProductToCart,
+    deleteProductFromCartProducts,
     getCartProductsById,
     getCartProductByCart,
     updateCartProduct,

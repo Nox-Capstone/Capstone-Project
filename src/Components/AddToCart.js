@@ -9,7 +9,6 @@ const AddToCart = (props) => {
         try {
             const updatedCart = await addToCart({ productId, cartId, quantity })
             setCart(updatedCart)
-            console.log(updatedCart, 'added to cart')
         } catch (error) {
             console.error(error)
         }

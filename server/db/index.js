@@ -33,7 +33,7 @@ const syncTables = async () => {
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price INTEGER,
-    quantity INTEGER,
+    stock INTEGER,
     brand TEXT,
     tag TEXT,
     image VARCHAR(255)

@@ -3,7 +3,7 @@ const client = require('./client');
 const createProduct = async ({ name, description, price, quantity, brand, tag, image }) => {
     try {
         const SQL = `
-        INSERT INTO products (name, description, price, quantity, brand, tag, image)
+        INSERT INTO products (name, description, price, stock, brand, tag, image)
         VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING *
         `;
