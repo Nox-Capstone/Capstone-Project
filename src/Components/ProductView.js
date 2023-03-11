@@ -22,7 +22,7 @@ const ProductView = (props) => {
             <p>Price: ${product.price}</p>
             <p>Description: {product.description}</p>
             <p>Product Type: {product.tag}</p>
-            <p>Quantity: {product.quantity}</p>
+            <p>Stock: {product.stock}</p>
             <div>
                 <AddToCart productId={id} cartId={cart.id} setCart={setCart} />
             </div>

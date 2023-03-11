@@ -1,6 +1,6 @@
 const client = require('./client');
 const jwt = require('jsonwebtoken');
-const JWT = process.env.JWT;
+const JWT = process.env.JWT_SECRET;
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
@@ -18,7 +18,8 @@ const createUser = async ({ username, password, isAdam }) => {
 }
 
 const getUserByToken = async (token) => {
-  const payload = await jwt.verify(token, JWT_SECRET);
+  const payload = await jwt.verify(token, JWT);
+  console.log(payload)
   const SQL = `
     SELECT users.*
     FROM users
