@@ -67,7 +67,7 @@ const App = () => {
             {user.username ? null : <Link to='/register'>Register</Link>}
             {user.username ? <button onClick={logout}>Logout</button> : <Link to='/login'>Login</Link>}
             <Link to='/products'>Products</Link>
-            <Link to='/cart'>Cart(0)</Link>
+            <Link to='/cart'>Cart({!cart.products ? 0 : cart.products.length})</Link>
           </>
 
         }
