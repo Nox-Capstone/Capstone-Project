@@ -12,7 +12,7 @@ const addProductToCart = async ({
             FROM cart_products
             WHERE "cartId" = $2 AND "productsId" = $1
         `, [productsId, cartId])
-        
+
         if (checkCart.rows.length) {
             await client.query(`
             UPDATE cart_products
@@ -95,7 +95,7 @@ const deleteCartProducts = async (cartId) => {
         const { rows: [cart] } = await client.query(`
         DELETE 
         FROM cart_products
-        WHERE "cartId" = $1
+        WHERE "cartId" = $1 AND is_active = true
         RETURNING *
         `, [cartId]);
         return cart;

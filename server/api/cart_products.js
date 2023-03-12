@@ -38,8 +38,8 @@ router.delete('/:id', async (req, res, next) => {
     }
     const cart = await getCartByUserId(user.id);
     await deleteProductFromCart({ productsId: id, cartId: cart.id });
-    const updatedCart = await getCartProductByCart(cart.id)
-    // const updatedCart = await getCartByUserId(user.id)
+    // const updatedCart = await getCartProductByCart(cart.id)
+    const updatedCart = await getCartByUserId(user.id)
     res.send({ updatedCart });
 });
 
