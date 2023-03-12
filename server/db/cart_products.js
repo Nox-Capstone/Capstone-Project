@@ -37,16 +37,6 @@ const addProductToCart = async ({
     }
 }
 
-const deleteProductFromCartProducts = async ({
-    productsId,
-    cartId
-}) => {
-    await client.query(`
-        DELETE FROM cart_products
-        WHERE "productsId" = $1 AND "cartId" = $2
-    `, [productsId, cartId]);
-}
-
 const getCartProductsById = async (id) => {
     try {
         const { rows: [cartProduct] } = await client.query(`
@@ -90,6 +80,16 @@ const updateCartProduct = async ({ id, ...fields }) => {
     }
 }
 
+const deleteProductFromCart = async ({
+    productsId,
+    cartId
+}) => {
+    await client.query(`
+        DELETE FROM cart_products
+        WHERE "productsId" = $1 AND "cartId" = $2
+    `, [productsId, cartId]);
+}
+
 const deleteCartProducts = async (cartId) => {
     try {
         const { rows: [cart] } = await client.query(`
@@ -106,7 +106,7 @@ const deleteCartProducts = async (cartId) => {
 
 module.exports = {
     addProductToCart,
-    deleteProductFromCartProducts,
+    deleteProductFromCart,
     getCartProductsById,
     getCartProductByCart,
     updateCartProduct,

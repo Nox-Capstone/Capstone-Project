@@ -4,7 +4,6 @@ import AddToCart from './AddToCart';
 
 const ProductView = (props) => {
     const products = props.products;
-    // const cartId = 'cart placeholder'
     const id = useParams().productId;
     const {cart, setCart} = props
     console.log(cart)

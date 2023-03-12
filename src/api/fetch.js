@@ -174,6 +174,8 @@ const exchangeTokenForUser = async () => {
   }  
 };
 
+
+
 module.exports = {
     fetchProducts,
     fetchProductsById,

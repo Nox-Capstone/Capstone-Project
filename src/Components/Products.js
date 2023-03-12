@@ -6,10 +6,10 @@ const Products = (props) => {
     const navigate = useNavigate();
     const Search = () =>{
         return (
-        <div>
-            
-        </div>
-            )
+            <div>
+                
+            </div>
+        )
     }
     return (
         <div>
