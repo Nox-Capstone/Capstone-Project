@@ -25,8 +25,7 @@ const getCartByUserId = async (userId) => {
         FROM cart_products
         LEFT JOIN products ON cart_products."productsId" = products.id
         WHERE cart_products."cartId" = $1
-        `[cart.id])
-        // console.log(cart, 'cart in db cart')
+        `,[cart.id])
         cart.products = productsResponse.rows;
         return cart;
 }
@@ -45,7 +44,6 @@ const getCartByCartId = async (id) => {
         LEFT JOIN products ON cart_products."productsId" = products.id
         WHERE cart_products."cartId" = $1
         `,[cart.id])
-        // console.log(cart, 'cart in db cart')
         cart.products = productsResponse.rows;
         console.log(productsResponse.rows, ' PR in cart DB')
         return cart;
