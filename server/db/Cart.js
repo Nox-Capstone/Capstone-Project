@@ -14,7 +14,6 @@ const createCart = async (userId) => {
 }
 
 const getCartByUserId = async (userId) => {
-    try {
         const { rows: [cart] } = await client.query(`
         SELECT *
         FROM cart
@@ -30,9 +29,6 @@ const getCartByUserId = async (userId) => {
         // console.log(cart, 'cart in db cart')
         cart.products = productsResponse.rows;
         return cart;
-    } catch (err) {
-        throw err;
-    }
 }
 
 const getCartByCartId = async (id) => {

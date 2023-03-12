@@ -32,14 +32,20 @@ const App = () => {
   const getUser = async () => {
     if(window.localStorage.getItem("token")){
       const user = await exchangeTokenForUser();
-      const cart = await fetchCartByUserId(user.id)
-      setUser(user);
-      setCart(cart);
+      setUser(user);     
     } else setUser({})
+  }
+
+  const getCart = async () => {
+    const user = await exchangeTokenForUser();
+    const cart = await fetchCartByUserId(user.id)
+    console.log(cart, "HI I'm CART AT APP")
+    setCart(cart);
   }
 
   useEffect(() => {
     getUser();
+    getCart();
     getProducts();
     getAllUsers();
   }, []);
@@ -61,7 +67,7 @@ const App = () => {
             {user.username ? null : <Link to='/register'>Register</Link>}
             {user.username ? <button onClick={logout}>Logout</button> : <Link to='/login'>Login</Link>}
             <Link to='/products'>Products</Link>
-            <Link to='/cart'>Cart</Link>
+            <Link to='/cart'>Cart(0)</Link>
           </>
 
         }
