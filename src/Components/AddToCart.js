@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { addToCart } from '../api/fetch';
 
 const AddToCart = (props) => {
-    const { productId, cartId, setCart } = props
+    const { product, cartId, setCart } = props
     const [quantity, setQuantity] = useState(1);
-
     const handleSubmit = async () => {
         try {
-            const updatedCart = await addToCart({ productId, cartId, quantity })
+            const updatedCart = await addToCart({ productId: product.id, cartId, quantity })
             setCart(updatedCart)
         } catch (error) {
             console.error(error)
@@ -16,16 +15,23 @@ const AddToCart = (props) => {
 
     return (
         <div>
-            <label htmlFor='quantity'>Quantity: </label>
+            <button onClick={(ev) => {
+                ev.preventDefault()
+                quantity - 1 > 0 ? setQuantity(quantity-1):null
+            }
+            }>-</button>
             <input
                 type="number"
-                id="quantity"
-                name="quantity"
                 value={quantity}
-                onChange={(ev) => setQuantity(ev.target.value)}
+                disabled={true}
             >
             </input>
-            <button onClick={handleSubmit}>Add to cart</button>
+            <button onClick={(ev) => {
+                ev.preventDefault()
+                quantity + 1 <= product.stock ? setQuantity(quantity+1):null
+            }
+            }>+</button>
+            <button onClick={handleSubmit}>Add To Cart</button>
         </div>
     )
 }

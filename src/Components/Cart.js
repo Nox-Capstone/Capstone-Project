@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
 const Cart = (props) => {
-  const { user, cart, setCart } = props;
+  const { user, cart, setCart, products} = props;
 
   const deleteCartProduct = async (productsId) => {
     const token = window.localStorage.getItem("token");
