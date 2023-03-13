@@ -5,8 +5,10 @@ const AddToCart = (props) => {
     const { product, cartId, setCart } = props
     const [quantity, setQuantity] = useState(1);
     const handleSubmit = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return
         try {
-            const updatedCart = await addToCart({ productId: product.id, cartId, quantity })
+            const updatedCart = await addToCart({ token, productId: product.id, cartId, quantity })
             setCart(updatedCart)
         } catch (error) {
             console.error(error)
