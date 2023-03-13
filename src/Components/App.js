@@ -8,6 +8,7 @@ import Register from './Register';
 import Products from './Products';
 import ProductView from './ProductView';
 import AdminDash from './AdminDash';
+import Profile from './Profile';
 
 const App = () => {
   const [auth, setAuth] = useState({});
@@ -27,12 +28,12 @@ const App = () => {
     const allUsers = await fetchAllUsers();
     setAllUsers(allUsers);
   }
-  
+
 
   const getUser = async () => {
-    if(window.localStorage.getItem("token")){
+    if (window.localStorage.getItem("token")) {
       const user = await exchangeTokenForUser();
-      setUser(user);     
+      setUser(user);
       await getCart(user.id);
     } else setUser({})
   }
@@ -57,12 +58,13 @@ const App = () => {
 
   return (
     <div>
-      <h1>Nox PC Builder</h1>
+      <Link to='/'>Nox PC Builder</Link>
       <nav>
         {
 
           <>
             {user.isAdam ? <Link to='/admin'>Admin</Link> : null}
+            {user.username ? <Link to='/profile'>Profile</Link> : null}
             {user.username ? null : <Link to='/register'>Register</Link>}
             {user.username ? <button onClick={logout}>Logout</button> : <Link to='/login'>Login</Link>}
             <Link to='/products'>Products</Link>
@@ -81,13 +83,15 @@ const App = () => {
 
           ) : (
             <>
+              <Route path='/' element={<Home />} />
               <Route path='/register' element={<Register setToken={setToken} setUser={setUser} setCart={setCart} />} />
               <Route path='/login' element={<Login token={token} setUser={setUser} user={user} setCart={setCart} />} />
               <Route path='/products' element={<Products products={products} cart={cart} />} />
               <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
               <Route path='/products/:productId' element={<ProductView products={products} cart={cart} setCart={setCart} />} />
               <Route path='/cart' element={<Cart user={user} cart={cart} setCart={setCart} products={products} />} />
-              <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers}/>} />
+              <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} />} />
+              <Route path='/profile' element={<Profile user={user} />} />
             </>
           )
         }
