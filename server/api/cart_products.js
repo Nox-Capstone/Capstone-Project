@@ -2,13 +2,16 @@ const express = require("express");
 const { getCartByUserId } = require("../db/Cart");
 const router = express.Router();
 const { addProductToCart, getCartProductByCart, deleteProductFromCart } = require('../db/cart_products');
-const { getUserByToken } = require("../db/User");
+const { getUserByToken, authenticate } = require("../db/User");
 
 router.post('/', async (req, res, next) => {
+    const { productsId, cartId, quantity } = req.body;
+    const token = req.headers.authorization.slice(7);
     try {
-        const { productsId, cartId, quantity } = req.body;
-        const cartProduct = await addProductToCart({ productsId, cartId, quantity })
-        res.send(cartProduct);
+        const user = await getUserByToken(token);
+        await addProductToCart({ productsId, cartId, quantity })
+        const cart = await getCartByUserId(user.id) 
+        res.send(cart);
     } catch (error) {
         next(error)
     }
@@ -37,10 +40,12 @@ router.delete('/:id', async (req, res, next) => {
         return;
     }
     const cart = await getCartByUserId(user.id);
+    console.log('CART', cart)
     await deleteProductFromCart({ productsId: id, cartId: cart.id });
     // const updatedCart = await getCartProductByCart(cart.id)
     const updatedCart = await getCartByUserId(user.id)
-    res.send({ updatedCart });
+    res.send(updatedCart);
+    // res.send(cart);
 });
 
 module.exports = router;

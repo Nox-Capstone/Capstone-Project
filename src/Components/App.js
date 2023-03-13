@@ -33,19 +33,18 @@ const App = () => {
     if(window.localStorage.getItem("token")){
       const user = await exchangeTokenForUser();
       setUser(user);     
+      await getCart(user.id);
     } else setUser({})
   }
 
-  const getCart = async () => {
-    const user = await exchangeTokenForUser();
-    const cart = await fetchCartByUserId(user.id)
-    console.log(cart, "HI I'm CART AT APP")
+  const getCart = async (userId) => {
+    const cart = await fetchCartByUserId(userId)
+    console.log("HI I'm CART AT APP", cart)
     setCart(cart);
   }
 
   useEffect(() => {
     getUser();
-    getCart();
     getProducts();
     getAllUsers();
   }, []);
