@@ -58,7 +58,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Nox PC Builder</h1>
+      <Link to='/'>Nox PC Builder</Link>
       <nav>
         {
 
@@ -83,6 +83,7 @@ const App = () => {
 
           ) : (
             <>
+              <Route path='/' element={<Home />} />
               <Route path='/register' element={<Register setToken={setToken} setUser={setUser} setCart={setCart} />} />
               <Route path='/login' element={<Login token={token} setUser={setUser} user={user} setCart={setCart} />} />
               <Route path='/products' element={<Products products={products} cart={cart} />} />
