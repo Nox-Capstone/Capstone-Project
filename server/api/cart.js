@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
         }
         const newToken = token.slice(7);
         const newCart = await createCart(userId);
-       // console.log('Cart Created for user: ',userId)
+        // console.log('Cart Created for user: ',userId)
         res.send(newCart);
 
     } catch (err) {
