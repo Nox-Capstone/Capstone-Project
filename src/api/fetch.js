@@ -100,7 +100,7 @@ const addToCart = async ({ token, productId, cartId, quantity }) => {
         body: JSON.stringify({
             cartId,
             productsId: productId,
-            quantity
+            quantity,
         })
     })
     const result = await response.json()

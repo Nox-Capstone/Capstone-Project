@@ -9,10 +9,10 @@ router.post('/', async (req, res, next) => {
     const token = req.headers.authorization.slice(7);
     try {
         const user = await getUserByToken(token);
-        console.log("User: ", user)
+        //console.log("User: ", user)
         await addProductToCart({ productsId, cartId, quantity })
         const cart = await getCartByUserId(user.id) 
-        console.log("Cart: ", cart)
+        //console.log("Cart: ", cart)
         res.send(cart);
     } catch (error) {
         next(error)
