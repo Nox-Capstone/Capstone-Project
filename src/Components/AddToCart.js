@@ -19,7 +19,7 @@ const AddToCart = (props) => {
         <div>
             <button onClick={(ev) => {
                 ev.preventDefault()
-                quantity - 1 > 0 ? setQuantity(quantity-1):null
+                quantity - 1 > 0 ? setQuantity(quantity - 1) : null
             }
             }>-</button>
             <input
@@ -30,7 +30,7 @@ const AddToCart = (props) => {
             </input>
             <button onClick={(ev) => {
                 ev.preventDefault()
-                quantity + 1 <= product.stock ? setQuantity(quantity+1):null
+                quantity + 1 <= product.stock ? setQuantity(quantity + 1) : null
             }
             }>+</button>
             <button onClick={handleSubmit}>Add To Cart</button>
