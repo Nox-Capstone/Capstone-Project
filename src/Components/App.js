@@ -8,7 +8,7 @@ import Register from './Register';
 import Products from './Products';
 import ProductView from './ProductView';
 import AdminDash from './AdminDash';
-
+import {HiShoppingCart} from 'react-icons/hi'
 const App = () => {
   const [auth, setAuth] = useState({});
   const [products, setProducts] = useState([]);
@@ -64,9 +64,17 @@ const App = () => {
           <>
             {user.isAdam ? <Link to='/admin'>Admin</Link> : null}
             {user.username ? null : <Link to='/register'>Register</Link>}
-            {user.username ? <button onClick={logout}>Logout</button> : <Link to='/login'>Login</Link>}
+            {user.username ? <Link onClick={logout}>Logout</Link> : <Link to='/login'>Login</Link>}
             <Link to='/products'>Products</Link>
-            <Link to='/cart'>Cart({!cart.products ? 0 : cart.products.length})</Link>
+            <Link to='/cart'>
+              <div className='cart-icon'>
+              <span className='qty-span'>
+              {!cart.products ? 0 : cart.products.length}
+              </span>
+              <HiShoppingCart />
+
+              </div>
+              </Link>
           </>
 
         }
