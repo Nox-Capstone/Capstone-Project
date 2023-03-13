@@ -4,7 +4,7 @@ const client = require('./client');
 const addProductToCart = async ({
     productsId,
     cartId,
-    quantity = 1
+    quantity = 1,
 }) => {
     try {
         const checkCart = await client.query(`
@@ -12,11 +12,10 @@ const addProductToCart = async ({
             FROM cart_products
             WHERE "cartId" = $2 AND "productsId" = $1
         `, [productsId, cartId])
-
-        if (checkCart.rows.length) {
+      if (checkCart.rows.length) {
             await client.query(`
             UPDATE cart_products
-            SET quantity = quantity + $3
+            SET quantity =  $3
             WHERE "cartId" = $2 AND "productsId" = $1 
             `, [productsId, cartId, quantity])
             const cart = await getCartByCartId(cartId)

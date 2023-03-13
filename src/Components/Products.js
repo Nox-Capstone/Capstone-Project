@@ -31,7 +31,7 @@ const Products = (props) => {
                                         Price: ${product.price}
                                     </li>
                                     <li>
-                                        Stock: {product.quantity}
+                                        Stock: {product.stock}
                                     </li>
                                     <li>
                                         Type: {product.tag}

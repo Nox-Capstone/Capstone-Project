@@ -27,7 +27,7 @@ const getCartByUserId = async (userId) => {
         WHERE cart_products."cartId" = $1
         `,[cart.id])
         cart.products = productsResponse.rows;
-        console.log("CART in getCartByUserId", cart)
+        //console.log("CART in getCartByUserId", cart)
         return cart;
 }
 
@@ -46,7 +46,7 @@ const getCartByCartId = async (id) => {
         WHERE cart_products."cartId" = $1
         `,[cart.id])
         cart.products = productsResponse.rows;
-        console.log(' PR in cart DB: ', productsResponse.rows)
+        //console.log(' PR in cart DB: ', productsResponse.rows)
         return cart;
     } catch (error) {
         throw error;
