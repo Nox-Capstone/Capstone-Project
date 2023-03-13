@@ -52,8 +52,20 @@ const getCartByCartId = async (id) => {
         throw error;
     }
 }
+
+const checkoutCart = async (cartId, userId) => {
+    const {rows: [cart]} = await client.query(`
+        UPDATE cart
+        SET is_active = false
+        WHERE id = $1
+    `, [cartId]);
+    const newCart = await createCart(userId);
+    return newCart; 
+}
+
 module.exports = {
     createCart,
     getCartByUserId,
-    getCartByCartId
+    getCartByCartId,
+    checkoutCart
 }

@@ -1,6 +1,6 @@
 const express = require("express");
-const { getCartByUserId, createCart } = require("../db/Cart");
-const { getUserById } = require("../db/User");
+const { getCartByUserId, createCart, checkoutCart } = require("../db/Cart");
+const { getUserById, getUserByToken } = require("../db/User");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
@@ -34,6 +34,14 @@ router.post('/', async (req, res, next) => {
     } catch (err) {
         next(err)
     }
+})
+
+router.post('/checkout', async (req, res, next) => {
+    const user = await getUserByToken(req.headers.authorization);
+    console.log(user)
+    const cart = await getCartByUserId(user.id);
+    const newCart = await checkoutCart(cart.id, user.id);
+    res.send(newCart);
 })
 
 

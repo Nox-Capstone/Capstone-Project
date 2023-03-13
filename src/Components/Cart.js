@@ -6,6 +6,8 @@ const Cart = (props) => {
   const { user, cart, setCart, products } = props;
   const token = window.localStorage.getItem("token")
   const [quantity, setQuantity] = useState(1);
+
+  //Delete cart function
   const deleteCartProduct = async (productsId) => {
     const token = window.localStorage.getItem("token");
     console.log(productsId, "calling delete cart product");
@@ -21,6 +23,21 @@ const Cart = (props) => {
     setCart(updatedCart);
     return updatedCart;
   };
+
+  //Purchase cart function
+  const purchaseCart = async () => {
+    const token = window.localStorage.getItem('token');
+    if(!token) return;
+    const response = await fetch(`/api/cart/checkout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application',
+        Authorization: token,
+      },
+    });
+    const newCart = await response.json();
+    setCart(newCart);
+  }
 
   if (!user && !cart) {
     return null;
@@ -65,6 +82,11 @@ const Cart = (props) => {
           );
         })}
       </ul>
+      <button
+        onClick={async ()=> {
+          const newCart = await purchaseCart();
+        }}
+      >CHECKOUT</button>
     </div>
   );
 };

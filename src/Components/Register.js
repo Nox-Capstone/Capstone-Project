@@ -7,11 +7,6 @@ const Register = (props) => {
     const [password, setPassword] = useState('');
     const {setToken, setUser ,setCart} = props;
 
-    const registerCart = async ({token, userId}) =>{
-        const cart = await createCart({token, userId});
-        return cart;
-    }
-
     const registerButton = async (ev) => {
         ev.preventDefault();
         const registerUser = await fetchRegister( username, password );
@@ -23,10 +18,6 @@ const Register = (props) => {
         if(registerUser.user){
             setUser(registerUser.user)
         }
-        const user = registerUser.newUser;
-        const userId = user.id
-        registerCart({token, userId})
-        setCart(registerCart)
     };
     return (
         <div>
