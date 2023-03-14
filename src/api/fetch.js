@@ -91,20 +91,20 @@ const fetchAllUsers = async () => {
 
 const addToCart = async ({ token, productId, cartId, quantity }) => {
     try {
-    const response = await fetch(`api/cart_products`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            cartId,
-            productsId: productId,
-            quantity,
+        const response = await fetch(`api/cart_products`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                cartId,
+                productsId: productId,
+                quantity,
+            })
         })
-    })
-    const result = await response.json()
-    return result;
+        const result = await response.json()
+        return result;
     } catch (error) {
         console.error(error)
     }
@@ -145,48 +145,48 @@ const fetchCartByUserId = async (userId) => {
 }
 
 const fetchCartProductByCartId = async (cartId) => {
-    try{
-        const response = await fetch(`api/cart_products/${cartId}`,{
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+    try {
+        const response = await fetch(`api/cart_products/${cartId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
         const result = await response.json();
         console.log()
         return result;
-    }catch(error){
+    } catch (error) {
         console.error(error);
     }
 }
 
 const exchangeTokenForUser = async () => {
-  const token = window.localStorage.getItem("token");
-  if(token){
-    const response = await fetch(`api/users/me`, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    });
-    const result = await response.json();
-    return result;
-  }  
+    const token = window.localStorage.getItem("token");
+    if (token) {
+        const response = await fetch(`api/users/me`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        });
+        const result = await response.json();
+        return result;
+    }
 };
 
 const updateProduct = async ({
-    token, 
+    token,
     productId,
-    name, 
-    description, 
-    price, 
-    stock, 
-    brand, 
-    tag, 
+    name,
+    description,
+    price,
+    stock,
+    brand,
+    tag,
     image
 }) => {
     try {
-        if(token){
+        if (token) {
             const response = await fetch(`api/products/${productId}`, {
                 method: 'PATCH',
                 headers: {
@@ -211,6 +211,22 @@ const updateProduct = async ({
     };
 };
 
+const fetchDeleteProduct = async ({ id, token }) => {
+    console.log("FETCH DELETEPRODUCT ID", id)
+    try {
+        const response = await fetch(`api/products/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token
+            },
+        });
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error(err)
+    }
+}
 
 
 module.exports = {
@@ -225,5 +241,6 @@ module.exports = {
     addToCart,
     createCart,
     exchangeTokenForUser,
-    updateProduct
+    updateProduct,
+    fetchDeleteProduct
 }

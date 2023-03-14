@@ -8,7 +8,7 @@ import Register from './Register';
 import Products from './Products';
 import ProductView from './ProductView';
 import AdminDash from './AdminDash';
-import {HiShoppingCart} from 'react-icons/hi'
+import { HiShoppingCart } from 'react-icons/hi'
 import Profile from './Profile';
 
 const App = () => {
@@ -41,7 +41,7 @@ const App = () => {
 
   const getCart = async (userId) => {
     const cart = await fetchCartByUserId(userId)
-    console.log("HI I'm CART AT APP", cart)
+    // console.log("HI I'm CART AT APP", cart)
     setCart(cart);
   }
 
@@ -71,13 +71,13 @@ const App = () => {
             <Link to='/products'>Products</Link>
             <Link to='/cart'>
               <div className='cart-icon'>
-              <span className='qty-span'>
-              {!cart.products ? 0 : cart.products.length}
-              </span>
-              <HiShoppingCart />
+                <span className='qty-span'>
+                  {!cart.products ? 0 : cart.products.length}
+                </span>
+                <HiShoppingCart />
 
               </div>
-              </Link>
+            </Link>
           </>
 
         }
