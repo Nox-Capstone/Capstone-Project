@@ -10,6 +10,7 @@ import ProductView from './ProductView';
 import AdminDash from './AdminDash';
 import { HiShoppingCart } from 'react-icons/hi'
 import Profile from './Profile';
+import NoxWhite from './Logos/NoxWhite.png';
 
 const App = () => {
   const [auth, setAuth] = useState({});
@@ -59,10 +60,9 @@ const App = () => {
 
   return (
     <div>
-      <Link to='/'>Nox PC Builder</Link>
-      <nav>
+      <nav className='navBar'>
+        <Link to='/'><img className='logo' src={NoxWhite}/></Link>
         {
-
           <>
             {user.isAdam ? <Link to='/admin'>Admin</Link> : null}
             {user.username ? <Link to='/profile'>Profile</Link> : null}
@@ -76,34 +76,23 @@ const App = () => {
                 </span>
                 <HiShoppingCart />
 
+
               </div>
             </Link>
           </>
-
         }
       </nav>
 
       <Routes>
-        {
-          auth.id ? (
-            <>
-              <Route path='/' element={<Home />} />
-            </>
-
-          ) : (
-            <>
-              <Route path='/' element={<Home />} />
-              <Route path='/register' element={<Register setToken={setToken} setUser={setUser} setCart={setCart} />} />
-              <Route path='/login' element={<Login token={token} setUser={setUser} user={user} setCart={setCart} />} />
-              <Route path='/products' element={<Products products={products} cart={cart} />} />
-              <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
-              <Route path='/products/:productId' element={<ProductView products={products} cart={cart} setCart={setCart} />} />
-              <Route path='/cart' element={<Cart user={user} cart={cart} setCart={setCart} products={products} />} />
-              <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} />} />
-              <Route path='/profile' element={<Profile user={user} />} />
-            </>
-          )
-        }
+        <Route path='/' element={<Home products={products} />} />
+        <Route path='/register' element={<Register setToken={setToken} setUser={setUser} setCart={setCart} />} />
+        <Route path='/login' element={<Login token={token} setUser={setUser} user={user} setCart={setCart} />} />
+        <Route path='/products' element={<Products products={products} cart={cart} />} />
+        <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
+        <Route path='/products/:productId' element={<ProductView products={products} cart={cart} setCart={setCart} />} />
+        <Route path='/cart' element={<Cart user={user} cart={cart} setCart={setCart} products={products} />} />
+        <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} />} />
+        <Route path='/profile' element={<Profile user={user} />} />
       </Routes>
     </div>
   );
