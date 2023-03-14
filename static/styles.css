@@ -132,5 +132,41 @@ nav {
   vertical-align: middle;
   font-size: 25px;
   cursor: pointer;
-  color: black;
+  color: white;
+}
+
+.carousel{
+  display: flex;
+  justify-content: center;
+}
+.carousel .slide{
+  height: 50%;
+}
+.carousel .slide img{
+  max-height: 100%;
+  width: auto;
+}
+.dispImg{
+  margin: 0 auto;
+  height: 50%;
+  width: 25%;
+}
+.navBar {
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  margin: 5px 0 5px 0;
+  align-items: center;
+  padding: 10px 0 10px 0;
+}
+.navBar > a{
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: larger;
+  font-weight: bold;
+}
+.logo{
+  height: 50px;
+  width: 100px;
 }

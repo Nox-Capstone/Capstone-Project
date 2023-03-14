@@ -68,7 +68,8 @@ const Cart = (props) => {
                   }
                 </select>
                 <button onClick={async () => {
-                  await addToCart({ token, productId: product.id, cartId: cart.id, quantity })
+                  const newCart = await addToCart({ token, productId: product.id, cartId: cart.id, quantity })
+                  setCart(newCart)
                 }}>Update Cart
                 </button>
               </div>
