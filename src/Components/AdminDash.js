@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { fetchDeleteProduct } from '../api/fetch';
 import EditProduct from './EditProduct';
 
 const AdminDash = (props) => {
@@ -6,8 +7,8 @@ const AdminDash = (props) => {
     const [product, setProduct] = useState({});
     const token = window.localStorage.getItem("token")
 
-    if(token){
-        return(
+    if (token) {
+        return (
             <div className="adminDash">
                 <h1>Welcome to the Admin Page</h1>
                 <div className="adminUsersProducts">
@@ -23,14 +24,14 @@ const AdminDash = (props) => {
                                     <p>{product.quantity}</p>
                                     <p>{product.brand}</p>
                                     <p>{product.tag}</p>
-                                    <button onClick={()=> setProduct(product)}>Edit</button>
-                                    <button>Delete</button>
-                                </div>    
+                                    <button onClick={() => setProduct(product)}>Edit</button>
+                                    <button onClick={async () => { await fetchDeleteProduct({ id: product.id, token: token }) }}>Delete</button>
+                                </div>
                             );
                         })};
                     </div>
                     <div className="editProduct">
-                        <EditProduct product={product} setProduct={setProduct}/>
+                        <EditProduct product={product} setProduct={setProduct} />
                     </div>
                     <div className="adminUsers">
                         <h1>Users</h1>
@@ -39,7 +40,7 @@ const AdminDash = (props) => {
                             return (
                                 <div key={user.id}>
                                     <h3>{user.username}</h3>
-                                    { !user.isAdam ? <button>Delete User</button> : null }
+                                    {!user.isAdam ? <button>Delete User</button> : null}
                                     <hr></hr>
                                 </div>
                             )
