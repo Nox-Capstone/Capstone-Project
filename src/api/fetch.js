@@ -174,6 +174,10 @@ const exchangeTokenForUser = async () => {
   }  
 };
 
+const updateProduct = async () => {
+
+}
+
 
 
 module.exports = {
@@ -187,5 +191,6 @@ module.exports = {
     fetchCartProductByCartId,
     addToCart,
     createCart,
-    exchangeTokenForUser
+    exchangeTokenForUser,
+    updateProduct
 }

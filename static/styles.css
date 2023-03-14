@@ -41,8 +41,8 @@ nav {
   margin: 8px;
   padding: 8px;
   background-color: rgb(162, 161, 161);
-  max-width: 40rem;
-  min-width: 40rem;
+  max-width: 25rem;
+  min-width: 25rem;
 }
 
 .products-container {
