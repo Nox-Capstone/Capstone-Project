@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import EditProduct from './EditProduct';
 
 const AdminDash = (props) => {
     const { products, allUsers } = props;
+    const [product, setProduct] = useState({});
     const token = window.localStorage.getItem("token")
 
     if(token){
@@ -21,11 +23,14 @@ const AdminDash = (props) => {
                                     <p>{product.quantity}</p>
                                     <p>{product.brand}</p>
                                     <p>{product.tag}</p>
-                                    <button>Edit</button>
+                                    <button onClick={()=> setProduct(product)}>Edit</button>
                                     <button>Delete</button>
                                 </div>    
                             );
                         })};
+                    </div>
+                    <div className="editProduct">
+                        <EditProduct product={product} setProduct={setProduct}/>
                     </div>
                     <div className="adminUsers">
                         <h1>Users</h1>
