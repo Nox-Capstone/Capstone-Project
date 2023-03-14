@@ -174,9 +174,42 @@ const exchangeTokenForUser = async () => {
   }  
 };
 
-const updateProduct = async () => {
-
-}
+const updateProduct = async ({
+    token, 
+    productId,
+    name, 
+    description, 
+    price, 
+    stock, 
+    brand, 
+    tag, 
+    image
+}) => {
+    try {
+        if(token){
+            const response = await fetch(`api/products/${productId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token
+                },
+                body: JSON.stringify({
+                    name,
+                    description,
+                    price,
+                    stock,
+                    brand,
+                    tag,
+                    image
+                })
+            });
+            const result = await response.json();
+            return result;
+        }
+    } catch (err) {
+        console.error(err);
+    };
+};
 
 
 
