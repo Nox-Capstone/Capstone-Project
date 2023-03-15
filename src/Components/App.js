@@ -52,6 +52,10 @@ const App = () => {
     getAllUsers();
   }, []);
 
+  useEffect(()=>{
+    getProducts();
+  }, [products])
+
   const logout = async (ev) => {
     window.localStorage.removeItem("token", token)
     setUser({})

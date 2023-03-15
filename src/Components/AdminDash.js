@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDeleteProduct } from '../api/fetch';
-import EditProduct from './EditProduct';
+import EditAddProduct from './EditAddProduct';
 
 const AdminDash = (props) => {
     const { products, allUsers } = props;
@@ -31,7 +31,7 @@ const AdminDash = (props) => {
                         })};
                     </div>
                     <div className="editProduct">
-                        <EditProduct product={product} setProduct={setProduct} />
+                        <EditAddProduct product={product} setProduct={setProduct} />
                     </div>
                     <div className="adminUsers">
                         <h1>Users</h1>
@@ -40,6 +40,7 @@ const AdminDash = (props) => {
                             return (
                                 <div key={user.id}>
                                     <h3>{user.username}</h3>
+                                    {user.isAdam? <p>Admin</p> : <p>Standard User</p>}
                                     {!user.isAdam ? <button>Delete User</button> : null}
                                     <hr></hr>
                                 </div>
