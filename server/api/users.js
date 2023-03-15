@@ -11,8 +11,9 @@ router.post('/register', async (req, res, next) => {
     const { username, password } = req.body;
     try {
         const _user = await getUserByUsername(username);
-
+        
         if (_user) {
+            console.log('user found')
             res.send({
                 error: "Error",
                 name: "Registration Error",
@@ -25,10 +26,10 @@ router.post('/register', async (req, res, next) => {
                 message: "Password is less than 8 charactors"
             });
         } else {
-            const newUser = await createUser({ username, password });
-            const token = jwt.sign({ id: newUser.id, username }, process.env.JWT_SECRET);
+            const user = await createUser({ username, password });
+            const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET);
             res.send({
-                newUser,
+                user,
                 message: `The username ${username} has been registered successfully`,
                 token
             });
