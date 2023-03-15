@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchLogin, fetchUser, fetchCartByUserId } from '../api/fetch';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { Navigate } from 'react-router-dom';
 
 
 const Login = (props) => {
@@ -36,7 +36,9 @@ const Login = (props) => {
   };
   return (
     <div className="logout">
-
+      {localStorage.getItem('token') ? <h3>Thank you for logging in!</h3> :
+        <div>
+          <form className='login' onSubmit={login} >
       <div>
         <form className='login' onSubmit={login} >
           <h2>Login To Your Account</h2>
@@ -64,6 +66,7 @@ const Login = (props) => {
           </Link>
         </form>
       </div>
+
     </div>
   );
 };

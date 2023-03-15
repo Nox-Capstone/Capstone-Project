@@ -42,7 +42,7 @@ const App = () => {
 
   const getCart = async (userId) => {
     const cart = await fetchCartByUserId(userId)
-    console.log("HI I'm CART AT APP", cart)
+    // console.log("HI I'm CART AT APP", cart)
     setCart(cart);
   }
 
@@ -75,6 +75,8 @@ const App = () => {
                   {!cart.products ? 0 : cart.products.length}
                 </span>
                 <HiShoppingCart />
+
+
               </div>
             </Link>
           </>

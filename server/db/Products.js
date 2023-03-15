@@ -65,18 +65,18 @@ const getProductByName = async (name) => {
     }
 }
 
-const updateProducts = async (id, ...fields) => {
+const updateProducts = async ({ id, ...fields }) => {
     const setFields = Object.keys(fields).map(
         (key, index) => `"${key}"=$${index + 1}`
-      ).join(', ');
-
+    ).join(', ');
+    console.log(setFields)
     try {
-        const {rows: [product]} = await client.query(`
+        const { rows: [product] } = await client.query(`
         UPDATE products
         SET ${setFields}
-        WHERE id = ${id}
+        WHERE id=${id}
         RETURNING *
-        `, Object.values(fields))
+        `, [...Object.values(fields)]);
         return product;
     } catch (err) {
         throw err;
@@ -85,11 +85,11 @@ const updateProducts = async (id, ...fields) => {
 
 const deleteProducts = async (id) => {
     try {
-        const {rows: [product]} = await client.query(`
+        const { rows: [product] } = await client.query(`
         DELETE FROM products
         WHERE id = $1
-        `[id])
-        return product
+        `, [id])
+        return product;
     } catch (err) {
         throw err;
     }

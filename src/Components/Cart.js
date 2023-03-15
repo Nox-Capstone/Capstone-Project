@@ -1,47 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, Routes, Route } from "react-router-dom";
-import { addToCart } from "../api/fetch";
+import { addToCart, deleteCartProduct, purchaseCart } from "../api/fetch";
 
 const Cart = (props) => {
   const { user, cart, setCart, products } = props;
   const token = window.localStorage.getItem("token")
   const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(0)
 
-  //Delete cart function
-  const deleteCartProduct = async (productsId) => {
-    const token = window.localStorage.getItem("token");
-    console.log(productsId, "calling delete cart product");
-    if (!token) return;
-    const response = await fetch(`/api/cart_products/${productsId}`, {
-      method: 'DELETE',
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const updatedCart = await response.json();
-    setCart(updatedCart);
-    return updatedCart;
-  };
+  console.log(cart);
 
-  //Purchase cart function
-  const purchaseCart = async () => {
-    const token = window.localStorage.getItem('token');
-    if(!token) return;
-    const response = await fetch(`/api/cart/checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application',
-        Authorization: token,
-      },
-    });
-    const newCart = await response.json();
-    setCart(newCart);
-  }
-
-  if (!user && !cart) {
+  if (!cart) {
     return null;
   }
+
   return (
     <div>
       <h1>{user.username ? user.username : "Guest"}'s Cart</h1>
@@ -53,6 +25,12 @@ const Cart = (props) => {
               quantityArray.push(i)
             }
           }
+          let sum = 0
+          for (let i = 0; i < product.quantity; i++) {
+            sum += product.price;
+          }
+          //setTotal(sum);
+          console.log('total for: ',product.name,' is: $',sum)
           return (
             <li key={product.id}>
               {product.name}({product.quantity})
@@ -75,7 +53,8 @@ const Cart = (props) => {
               </div>
               <button
                 onClick={async () => {
-                  await deleteCartProduct(product.id);
+                  const updatedCart = await deleteCartProduct(product.id);
+                  setCart(updatedCart);
                 }}>
                 Remove Item
               </button>
@@ -84,10 +63,12 @@ const Cart = (props) => {
         })}
       </ul>
       <button
-        onClick={async ()=> {
+        onClick={async () => {
           const newCart = await purchaseCart();
+          setCart(newCart);
         }}
       >CHECKOUT</button>
+      <div className="total">Total: ${total}</div>
     </div>
   );
 };

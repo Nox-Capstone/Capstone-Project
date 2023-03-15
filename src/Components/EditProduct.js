@@ -19,6 +19,7 @@ const EditProduct = (props) => {
         setBrand(product.brand);
         setTag(product.tag);
         setImage(product.image);
+        setProduct(product)
     }, [product])
 
     const handleSubmit = async(ev) => {
@@ -42,6 +43,8 @@ const EditProduct = (props) => {
             console.error(err);
         };
     };
+
+    useEffect
 
     return (
         <form onSubmit={handleSubmit}>
