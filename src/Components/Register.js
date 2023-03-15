@@ -21,8 +21,8 @@ const Register = (props) => {
         if (registerUser.user) {
             setUser(registerUser.user)
             toast.success('Successfully Registered!')
-               const userId = registerUser.user.id;
-            const newCart = await createCart({token, userId});
+            const userId = registerUser.user.id;
+            const newCart = await createCart({ token, userId });
             setCart(newCart);
             navigate('/login')
         } else {

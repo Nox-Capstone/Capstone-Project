@@ -12,6 +12,15 @@ const Login = (props) => {
   const [message, setMessage] = useState('')
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    const timeout = setTimeout(()=>{
+      navigate("/")
+    }, 4000)
+    return () =>{
+      clearTimeout(timeout)
+    }
+  },[token])
+
   const getCart = async (id) => {
     const userCart = await fetchCartByUserId(id);
     setCart(userCart);
@@ -29,14 +38,12 @@ const Login = (props) => {
       setUser(user);
       getCart(user.id)
       toast.success('Login Successful!')
-      navigate('/')
     } else {
       toast.error('Login Failed')
     }
   };
   return (
     <div className="logout">
-      {localStorage.getItem('token') ? <h3>Thank you for logging in!</h3> :
         <div>
           <form className='login' onSubmit={login} >
             <h2>Login To Your Account</h2>
@@ -64,7 +71,6 @@ const Login = (props) => {
             </Link>
           </form>
         </div>
-      }
     </div>
   );
 };
