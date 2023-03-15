@@ -247,17 +247,14 @@ const fetchAddProduct = async ({
 };
 
 const fetchDeleteProduct = async ({ id, token }) => {
-    console.log("FETCH DELETEPRODUCT ID", id)
     try {
-        const response = await fetch(`api/products/${id}`, {
+        await fetch(`api/products/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: token
             },
         });
-        const result = await response.json();
-        return result;
     } catch (err) {
         console.error(err)
     }

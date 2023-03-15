@@ -87,8 +87,7 @@ router.delete('/:id', async (req, res, next) => {
                 message: 'Failed to update product'
             });
         } else {
-            const deleteProduct = await deleteProducts(id);
-            res.send(deleteProduct);
+            await deleteProducts(id);
         }
     } catch (err) {
         console.error(err)
