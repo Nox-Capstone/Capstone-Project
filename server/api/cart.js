@@ -15,7 +15,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-//api/cart POST method untested
+//api/cart POST method
 router.post('/', async (req, res, next) => {
     const { userId } = req.body;
     const token = req.header('Authorization');
@@ -26,11 +26,8 @@ router.post('/', async (req, res, next) => {
                 message: "You must be logged in"
             })
         }
-        const newToken = token.slice(7);
         const newCart = await createCart(userId);
-        // console.log('Cart Created for user: ',userId)
         res.send(newCart);
-
     } catch (err) {
         next(err)
     }

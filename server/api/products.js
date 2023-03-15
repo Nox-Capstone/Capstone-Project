@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { getAllProducts, getProductById, updateProducts, deleteProducts } = require("../db/Products");
+const { getAllProducts, getProductById, updateProducts, deleteProducts, createProduct } = require("../db/Products");
 
 //This is api/products
 router.get('/', async (req, res, next) => {
@@ -34,6 +34,25 @@ router.get('/:id', async (req, res, next) => {
         }
     } catch (error) {
         next(error);
+    }
+})
+
+//To add new product to database
+router.post('/', async (req, res, next) => {
+    const {name, description, price, stock, brand, tag, image} = req.body;
+    const token = req.header('Authorization');
+    try {
+        if (!token) {
+            res.send({
+                error: "No token",
+                message: "You must be logged in"
+            })
+        }
+        const newProduct = await createProduct({name, description, price, stock, brand, tag, image})
+        res.send(newProduct);
+
+    } catch (err) {
+        next(err);
     }
 })
 

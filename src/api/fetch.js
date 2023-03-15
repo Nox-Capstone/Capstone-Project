@@ -210,6 +210,42 @@ const updateProduct = async ({
     };
 };
 
+const fetchAddProduct = async ({
+    token, 
+    name, 
+    description, 
+    price, 
+    stock, 
+    brand, 
+    tag, 
+    image
+}) => {
+    try {
+        if(token){
+            const response = await fetch(`api/products`, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token
+                },
+                body: JSON.stringify({
+                    name, 
+                    description,
+                    price,
+                    stock,
+                    brand,
+                    tag,
+                    image
+                })
+            });
+            const result = await response.json();
+            return result;
+        }
+    } catch (err) {
+        console.error(err);
+    };
+};
+
 const fetchDeleteProduct = async ({ id, token }) => {
     console.log("FETCH DELETEPRODUCT ID", id)
     try {
@@ -276,6 +312,7 @@ module.exports = {
     createCart,
     exchangeTokenForUser,
     updateProduct,
+    fetchAddProduct,
     fetchDeleteProduct,
     deleteCartProduct,
     purchaseCart

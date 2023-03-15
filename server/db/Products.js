@@ -1,13 +1,13 @@
 const client = require('./client');
 //ADD REVIEWS TO PRODUCTS
-const createProduct = async ({ name, description, price, quantity, brand, tag, image }) => {
+const createProduct = async ({ name, description, price, stock, brand, tag, image }) => {
     try {
         const SQL = `
         INSERT INTO products (name, description, price, stock, brand, tag, image)
         VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING *
         `;
-        const product = await client.query(SQL, [name, description, price, quantity, brand, tag, image]);
+        const product = await client.query(SQL, [name, description, price, stock, brand, tag, image]);
         return product.rows[0];
     } catch (err) {
         throw err;

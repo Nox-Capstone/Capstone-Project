@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { updateProduct } from '../api/fetch';
+import { updateProduct, fetchAddProduct, fetchProducts } from '../api/fetch';
 
-const EditProduct = (props) => {
+
+const EditAddProduct = (props) => {
     const { product, setProduct } = props;
     const[name, setName] = useState("");
     const[description, setDescription] = useState("");
@@ -22,7 +23,7 @@ const EditProduct = (props) => {
         setProduct(product)
     }, [product])
 
-    const handleSubmit = async(ev) => {
+    const editProduct = async(ev) => {
         ev.preventDefault();
         const token = localStorage.getItem('token');
         if(!token) return;
@@ -44,10 +45,29 @@ const EditProduct = (props) => {
         };
     };
 
-    useEffect
+    const addProduct = async (ev) => {
+        ev.preventDefault();
+        const token = window.localStorage.getItem('token');
+        if(!token) return;
+        try {
+            const newProduct = await fetchAddProduct({
+                token, 
+                name, 
+                description, 
+                price, 
+                stock,
+                brand,
+                tag,
+                image
+            });
+            setProduct(newProduct)
+        } catch (err) {
+            console.error(err);
+        };
+    };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={product.id ? editProduct : addProduct}>
             <label>
                 Name:
                 <input type="text" value={name} onChange={(ev) => setName(ev.target.value)} />
@@ -60,12 +80,12 @@ const EditProduct = (props) => {
             <br />
             <label>
                 Price:
-                <input type="text" value={price} onChange={(ev) => setPrice(ev.target.value)} />
+                <input type="number" value={price} onChange={(ev) => setPrice(ev.target.value)} />
             </label>
             <br />
             <label>
                 Stock:
-                <input type="text" value={stock} onChange={(ev) => setStock(ev.target.value)} />
+                <input type="number" value={stock} onChange={(ev) => setStock(ev.target.value)} />
             </label>
             <br />
             <label>
@@ -83,10 +103,9 @@ const EditProduct = (props) => {
                 <input type="text" value={image} onChange={(ev) => setImage(ev.target.value)} />
             </label>
             <br />
-            <button type="submit">SAVE</button>
-
+            {product.id ? <button type="submit">SAVE</button> : <button type="submit">Add New Product</button>}
         </form>
     )
 }
 
-export default EditProduct;
+export default EditAddProduct;
