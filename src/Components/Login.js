@@ -28,29 +28,30 @@ const Login = (props) => {
 
   return (
     <div className="logout">
+      {localStorage.getItem('token') ? <h3>Thank you for logging in!</h3> :
+        <div>
+          <form className='login' onSubmit={login} >
 
-      <div>
-        <form className='login' onSubmit={login} >
-
-          <div className='userPass'>
-            <input
-              placeholder="username"
-              value={username}
-              onChange={(ev) => setUsername(ev.target.value)}
-            />
-            <input
-              placeholder="password"
-              type={'password'}
-              value={password}
-              onChange={(ev) => setPassword(ev.target.value)}
-            />
-            <button disabled={!username || !password}>Login</button>
-          </div>
-          <Link to='/Register'>
-            Don't Have An Account Yet? Click Here.
-          </Link>
-        </form>
-      </div>
+            <div className='userPass'>
+              <input
+                placeholder="username"
+                value={username}
+                onChange={(ev) => setUsername(ev.target.value)}
+              />
+              <input
+                placeholder="password"
+                type={'password'}
+                value={password}
+                onChange={(ev) => setPassword(ev.target.value)}
+              />
+              <button disabled={!username || !password}>Login</button>
+            </div>
+            <Link to='/Register'>
+              Don't Have An Account Yet? Click Here.
+            </Link>
+          </form>
+        </div>
+      }
     </div>
   );
 };
