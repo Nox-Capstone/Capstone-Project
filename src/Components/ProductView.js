@@ -6,7 +6,6 @@ const ProductView = props => {
   const products = props.products;
   const id = useParams().productId;
   const { cart, setCart } = props;
-  console.log(cart);
   const product = products.find(product => product.id === parseInt(id));
   if (!product) {
     return null;

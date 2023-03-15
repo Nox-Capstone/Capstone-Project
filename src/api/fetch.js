@@ -19,10 +19,9 @@ const fetchLogin = async (username, password) => {
     }
 }
 
-const fetchRegister = async (username, password) => {
+const fetchRegister = async ({username, password}) => {
     try {
-        const response = await fetch(
-            `/api/users/register/`,
+        const response = await fetch(`/api/users/register/`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -228,6 +227,41 @@ const fetchDeleteProduct = async ({ id, token }) => {
     }
 }
 
+const deleteCartProduct = async (productsId) => {
+    try {
+        const token = window.localStorage.getItem("token");
+        console.log(productsId, "calling delete cart product");
+        if (!token) return;
+        const response = await fetch(`/api/cart_products/${productsId}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        const updatedCart = await response.json();
+        return updatedCart;
+    } catch (error) {
+        console.error(error)
+    }
+}
+const purchaseCart = async () =>{
+    try{
+        const token = window.localStorage.getItem('token');
+        if(!token) return;
+        const response = await fetch(`/api/cart/checkout`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application',
+            Authorization: token,
+          },
+        });
+        const result = await response.json();
+        return result;
+    }catch(error){
+        console.error(error)
+    }
+}
 
 module.exports = {
     fetchProducts,
@@ -242,5 +276,7 @@ module.exports = {
     createCart,
     exchangeTokenForUser,
     updateProduct,
-    fetchDeleteProduct
+    fetchDeleteProduct,
+    deleteCartProduct,
+    purchaseCart
 }
