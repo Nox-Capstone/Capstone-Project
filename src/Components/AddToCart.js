@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { addToCart } from '../api/fetch';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+import toast, { Toaster } from 'react-hot-toast';
+
+
 const AddToCart = props => {
   const { product, cartId, setCart } = props;
   const [quantity, setQuantity] = useState(1);
   const handleSubmit = async () => {
     const token = localStorage.getItem('token');
-    if (!token) return;
-    try {
-      const updatedCart = await addToCart({
-        token,
-        productId: product.id,
-        cartId,
-        quantity
-      });
-      setCart(updatedCart);
-    } catch (error) {
-      console.error(error);
+
+    if (!token || !cartId) {
+      toast.error('Cannot Add to Cart Please login')
+      return
+    } else {
+      try {
+        const updatedCart = await addToCart({
+          token,
+          productId: product.id,
+          cartId,
+          quantity
+        });
+        setCart(updatedCart);
+        toast.success('Item Added to Cart')
+      } catch (error) {
+        console.error(error);
+      }
     }
-  };
+  }
+
 
   return (
-    <div>
+    <form className='atc-container'>
       <div className="add-to-card">
         <p>Quantity:</p>
         <button
@@ -44,12 +54,16 @@ const AddToCart = props => {
           <AiFillPlusCircle />
         </button>
       </div>
-      <div className="add-btn">
+      <div className="add-btn-div">
         <button className="add-btn" onClick={handleSubmit}>
           Add To Cart
         </button>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
       </div>
-    </div>
+    </form>
   );
 };
 

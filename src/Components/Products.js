@@ -8,15 +8,12 @@ const Products = props => {
     return <div />;
   };
   return (
-    <div>
-      <h1>
-        Products ({products.length})
-        <input
-          placeholder="search"
-          className="searchbar"
-          onChange={ev => navigate(`products/search/${ev.target.value}`)}
-        />
-      </h1>
+    <div className='productPage'>
+      <input
+        placeholder="search"
+        className="searchbar"
+        onChange={ev => navigate(`products/search/${ev.target.value}`)}
+      />
       <div>
         <div className="products-container">
           {products.map(product => {

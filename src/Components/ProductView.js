@@ -37,7 +37,7 @@ const ProductView = props => {
           <p>
             Stock: {product.stock}
           </p>
-          <div>
+          <div className='atcButton'>
             <AddToCart product={product} cartId={cart.id} setCart={setCart} />
           </div>
         </div>

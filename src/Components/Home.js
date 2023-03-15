@@ -14,7 +14,7 @@ const Home = (props) => {
   return (
     <form>
       <div>
-        <Carousel autoPlay infiniteLoop>
+        <Carousel autoPlay infiniteLoop centerMode>
           {dispArr.map((featured)=>(
             <div className='dispImg' key={featured.id}>
               <img src ={featured.image}/>

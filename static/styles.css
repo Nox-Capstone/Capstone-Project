@@ -1,5 +1,12 @@
+/* site wide */
+*{
+  font-family: 'Gruppo', cursive;
+}
 body {
+  background-color: #DDDDDD;
   font-family: verdana;
+  margin: 0;
+  color: black;
 }
 
 form {
@@ -7,7 +14,7 @@ form {
   flex-direction: column;
 }
 
-form > * {
+form>* {
   margin: 1rem;
 }
 
@@ -16,14 +23,39 @@ nav {
   justify-content: space-around;
 }
 
+.navBar {
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0 20px 0;
+}
+
+.navBar>a {
+  color: grey;
+  text-decoration: none;
+  background-color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.logo {
+  height: 50px;
+  width: 100px;
+}
+
+input {
+  display: flex;
+  margin: 1rem;
+  border-radius: 5px;
+}
+/* admin dash */
 .adminDash {
   display: flex;
   flex-direction: column;
-  background-color: rgb(93, 97, 95);
 }
 
 .adminUsersProducts {
-  background-color: brown;
   display: flex;
   justify-content: space-between;
 }
@@ -32,17 +64,44 @@ nav {
   border: 1px solid black;
   margin: 8px;
   padding: 8px;
-  background-color: rgb(162, 161, 161);
+  background-color: rgb(158, 158, 158);
   max-width: 40rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  margin-top: 0.5rem;
 }
 
 .adminUsers {
   border: 1px solid black;
   margin: 8px;
   padding: 8px;
-  background-color: rgb(162, 161, 161);
+  background-color: rgb(158, 158, 158);
   max-width: 25rem;
   min-width: 25rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  margin-top: 0.5rem;
+}
+
+.adminDash>h1 {
+  display: flex;
+  justify-content: center;
+}
+
+/* product page */
+.productPage{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 5rem 0;
+  align-items: center;
+}
+.searchbar{
+  height: 35px;
+  width: 100%;
+  border-color: black;
 }
 
 .products-container {
@@ -61,35 +120,51 @@ nav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   margin-top: 0.5rem;
 }
-.product-info > div {
+
+.product-info>div {
   margin-top: auto;
 }
+
 .product-info p {
   color: #777;
   font-size: 0.9rem;
   margin-top: auto;
 }
+
 .product-info img {
   width: 100%;
   cursor: pointer;
 }
+
 .details-styles {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 5rem;
   font-family: serif;
 }
+
 .details-styles img {
   width: 30rem;
 }
+
 .productInfo {
   width: 40%;
+  background-color: white;
+  padding: 5px;
+  border-radius: .5rem;
 }
+
 .productInfo p {
   width: 40%;
   color: #9d9d9d;
   margin: 1rem 0rem;
 }
+.productInfo>h2 {
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
 .qty-btn {
   font-size: 1.5rem;
   border: none;
@@ -97,10 +172,15 @@ nav {
   display: flex;
   padding: 1rem;
 }
+
 .add-to-card {
   display: flex;
 }
+
 .add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 2rem;
   width: 50%;
   font-weight: 500;
@@ -110,9 +190,16 @@ nav {
   cursor: pointer;
 }
 
+.atc-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 * {
   box-sizing: border-box;
 }
+
 .qty-span {
   position: absolute;
   top: -17px;
@@ -126,6 +213,7 @@ nav {
   background-color: #777;
   border-radius: 60%;
 }
+
 .cart-icon {
   position: relative;
   display: inline-block;
@@ -135,38 +223,91 @@ nav {
   color: white;
 }
 
-.carousel{
+/* home page */
+.carousel {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
-.carousel .slide{
-  height: 50%;
+
+.carousel .slide {
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  background-color: white;
 }
-.carousel .slide img{
+
+.carousel .slide img {
   max-height: 100%;
   width: auto;
 }
-.dispImg{
+
+.carousel .thumb {
+  background-color: white;
+  height: 60px;
+  width: 60px;
+}
+
+.dispImg {
   margin: 0 auto;
-  height: 50%;
-  width: 25%;
-}
-.navBar {
-  background-color: black;
-  display: flex;
-  justify-content: space-around;
-  margin: 5px 0 5px 0;
+  height: 75%;
+  width: auto;
   align-items: center;
-  padding: 10px 0 10px 0;
+  justify-content: center;
 }
-.navBar > a{
-  color: white;
+
+/* login and register pages */
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login>a{
   text-decoration: none;
-  background-color: black;
-  font-size: larger;
-  font-weight: bold;
+  color: black;
 }
-.logo{
-  height: 50px;
-  width: 100px;
+.regHead{
+  display: flex;
+  justify-content: center;
 }
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register>a{
+  text-decoration: none;
+  color: black;
+}
+.clickMe{
+  text-decoration: underline;
+  color: black;
+}
+.userpass{
+ display: flex; 
+ flex-direction: column;
+ width: 50%;
+ align-items: center;
+}
+.userpass>input{
+height: 35px;
+width: 100%;
+border-color: black;
+}
+.userpass>input>::placeholder{
+  color: white;
+}
+.userpass>button{
+  height: 35px;
+  border-color: black;
+  border-radius: 5rem;
+  color: black;
+  font-size: large;
+  width: 100%;
+  margin: 16px;
+}
+
