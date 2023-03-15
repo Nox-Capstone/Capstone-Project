@@ -6,11 +6,14 @@ const Cart = (props) => {
   const { user, cart, setCart, products } = props;
   const token = window.localStorage.getItem("token")
   const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(0)
 
+  console.log(cart);
 
-  if (!user && !cart) {
+  if (!cart) {
     return null;
   }
+
   return (
     <div>
       <h1>{user.username ? user.username : "Guest"}'s Cart</h1>
@@ -22,6 +25,12 @@ const Cart = (props) => {
               quantityArray.push(i)
             }
           }
+          let sum = 0
+          for (let i = 0; i < product.quantity; i++) {
+            sum += product.price;
+          }
+          //setTotal(sum);
+          console.log('total for: ',product.name,' is: $',sum)
           return (
             <li key={product.id}>
               {product.name}({product.quantity})
@@ -54,12 +63,12 @@ const Cart = (props) => {
         })}
       </ul>
       <button
-        onClick={async ()=> {
+        onClick={async () => {
           const newCart = await purchaseCart();
-          setCart(newCart)
+          setCart(newCart);
         }}
       >CHECKOUT</button>
-      <div className="total">Total: </div>
+      <div className="total">Total: ${total}</div>
     </div>
   );
 };

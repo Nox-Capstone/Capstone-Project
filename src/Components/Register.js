@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchRegister, createCart } from '../api/fetch';
+import { Navigate } from 'react-router-dom';
 
 const Register = (props) => {
     const [username, setUsername] = useState('');
