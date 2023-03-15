@@ -5,23 +5,23 @@ import { fetchRegister, createCart } from '../api/fetch';
 const Register = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const {setToken, setUser ,setCart} = props;
+    const { setToken, setUser, setCart } = props;
 
     const registerButton = async (ev) => {
         ev.preventDefault();
-        const registerUser = await fetchRegister( username, password );
+        const registerUser = await fetchRegister(username, password);
         const token = window.localStorage.getItem("token");
-        if(registerUser.token){
-            window.localStorage.setItem("token", token)
-            setToken(registerUser.token)
-        }
-        if(registerUser.user){
+        // if (registerUser.token) {
+        //     window.localStorage.setItem("token", token)
+        //     setToken(registerUser.token)
+        // }
+        if (registerUser.user) {
             setUser(registerUser.user)
         }
     };
-    return (
+    return (<div>
         <div>
-            <h2>Register</h2>
+            <h2>Register for an account with Nox!</h2>
             <form className='register' onSubmit={registerButton}>
                 <input
                     placeholder='username'
@@ -39,6 +39,7 @@ const Register = (props) => {
                 </Link>
             </form>
         </div>
+    </div>
     );
 }
 
