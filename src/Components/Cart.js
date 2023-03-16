@@ -10,7 +10,7 @@ const Cart = (props) => {
 
   console.log(cart);
 
-  if (!cart) {
+  if (!cart && !user) {
     return null;
   }
 

@@ -1,7 +1,8 @@
+const url = '/api'
 
 const fetchLogin = async (username, password) => {
     try {
-        const response = await fetch(`/api/users/login`, {
+        const response = await fetch(`${url}/users/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +22,7 @@ const fetchLogin = async (username, password) => {
 
 const fetchRegister = async ({username, password}) => {
     try {
-        const response = await fetch(`/api/users/register/`,
+        const response = await fetch(`${url}/users/register/`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -41,7 +42,7 @@ const fetchRegister = async ({username, password}) => {
 const fetchProducts = async () => {
     try {
         const response = await fetch(
-            '/api/products/',
+            `${url}/products/`,
             {
                 method: 'GET'
             }
@@ -57,7 +58,7 @@ const fetchProducts = async () => {
 const fetchProductsById = async (id) => {
     try {
         const response = await fetch(`
-        /api/products/${id}
+        ${url}/products/${id}
         `, {
             method: 'GET'
         }
@@ -69,7 +70,7 @@ const fetchProductsById = async (id) => {
 
 const fetchUser = async (token) => {
     try {
-        const response = await fetch(`/api/users/me`, {
+        const response = await fetch(`${url}/users/me`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -83,14 +84,14 @@ const fetchUser = async (token) => {
 }
 
 const fetchAllUsers = async () => {
-    const response = await fetch(`/api/users`);
+    const response = await fetch(`${url}/users`);
     const result = await response.json();
     return result;
 }
 
 const addToCart = async ({ token, productId, cartId, quantity }) => {
     try {
-        const response = await fetch(`api/cart_products`, {
+        const response = await fetch(`${url}/cart_products`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -111,7 +112,7 @@ const addToCart = async ({ token, productId, cartId, quantity }) => {
 
 const createCart = async ({ token, userId }) => {
     try {
-        const response = await fetch(`api/cart`, {
+        const response = await fetch(`${url}/cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -130,7 +131,7 @@ const createCart = async ({ token, userId }) => {
 
 const fetchCartByUserId = async (userId) => {
     try {
-        const response = await fetch(`api/cart/${userId}`, {
+        const response = await fetch(`${url}/cart/${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -145,7 +146,7 @@ const fetchCartByUserId = async (userId) => {
 
 const fetchCartProductByCartId = async (cartId) => {
     try {
-        const response = await fetch(`api/cart_products/${cartId}`, {
+        const response = await fetch(`${url}/cart_products/${cartId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -162,7 +163,7 @@ const fetchCartProductByCartId = async (cartId) => {
 const exchangeTokenForUser = async () => {
     const token = window.localStorage.getItem("token");
     if (token) {
-        const response = await fetch(`api/users/me`, {
+        const response = await fetch(`${url}/users/me`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
@@ -186,7 +187,7 @@ const updateProduct = async ({
 }) => {
     try {
         if (token) {
-            const response = await fetch(`api/products/${productId}`, {
+            const response = await fetch(`${url}/products/${productId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -222,7 +223,7 @@ const fetchAddProduct = async ({
 }) => {
     try {
         if(token){
-            const response = await fetch(`api/products`, {
+            const response = await fetch(`${url}/products`, {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
@@ -248,7 +249,7 @@ const fetchAddProduct = async ({
 
 const fetchDeleteProduct = async ({ id, token }) => {
     try {
-        await fetch(`api/products/${id}`, {
+        await fetch(`${url}/products/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -265,7 +266,7 @@ const deleteCartProduct = async (productsId) => {
         const token = window.localStorage.getItem("token");
         console.log(productsId, "calling delete cart product");
         if (!token) return;
-        const response = await fetch(`/api/cart_products/${productsId}`, {
+        const response = await fetch(`${url}/cart_products/${productsId}`, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
@@ -282,7 +283,7 @@ const purchaseCart = async () =>{
     try{
         const token = window.localStorage.getItem('token');
         if(!token) return;
-        const response = await fetch(`/api/cart/checkout`, {
+        const response = await fetch(`${url}/cart/checkout`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application',
