@@ -11,6 +11,7 @@ const EditAddProduct = (props) => {
     const[brand, setBrand] = useState("");
     const[tag, setTag] = useState("");
     const[image, setImage] = useState("");
+    const[formSubmit, setFormSubmit] = useState(false)
 
     useEffect(()=> {
         setName(product.name);
@@ -22,6 +23,22 @@ const EditAddProduct = (props) => {
         setImage(product.image);
         setProduct(product)
     }, [product])
+
+    //Resets the input fields
+    useEffect(()=>{
+        clearFields();
+    }, [formSubmit])
+
+    const clearFields = () => {
+        setName("");
+        setDescription("");
+        setPrice("");
+        setStock("");
+        setBrand("");
+        setTag("");
+        setImage("");
+        setFormSubmit(false)
+    };
 
     const editProduct = async(ev) => {
         ev.preventDefault();
@@ -56,6 +73,7 @@ const EditAddProduct = (props) => {
                 }
             })
             setProducts(updated);
+            setFormSubmit(true);
         } catch (err) {
             console.error(err);
         };
@@ -77,6 +95,7 @@ const EditAddProduct = (props) => {
                 image
             });
             setProducts([newProduct, ...products])
+            setFormSubmit(true);
         } catch (err) {
             console.error(err);
         };
@@ -88,37 +107,37 @@ const EditAddProduct = (props) => {
                 Name:
                 <input type="text" value={name} onChange={(ev) => setName(ev.target.value)} />
             </label>
-            <br />
+            
             <label>
                 Description:
                 <input type="text" value={description} onChange={(ev) => setDescription(ev.target.value)} />
             </label>
-            <br />
+            
             <label>
                 Price:
                 <input type="number" value={price} onChange={(ev) => setPrice(ev.target.value)} />
             </label>
-            <br />
+            
             <label>
                 Stock:
                 <input type="number" value={stock} onChange={(ev) => setStock(ev.target.value)} />
             </label>
-            <br />
+            
             <label>
                 Brand:
                 <input type="text" value={brand} onChange={(ev) => setBrand(ev.target.value)} />
             </label>
-            <br />
+            
             <label>
                 Tag:
                 <input type="text" value={tag} onChange={(ev) => setTag(ev.target.value)} />
             </label>
-            <br />
+            
             <label>
                 Image URL:
                 <input type="text" value={image} onChange={(ev) => setImage(ev.target.value)} />
             </label>
-            <br />
+            
             {product.id ? <button type="submit">SAVE</button> : <button type="submit">Add New Product</button>}
         </form>
     )
