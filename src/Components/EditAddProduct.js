@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { updateProduct, fetchAddProduct, fetchProducts } from '../api/fetch';
+import { updateProduct, fetchAddProduct } from '../api/fetch';
 
 
 const EditAddProduct = (props) => {
@@ -40,6 +40,22 @@ const EditAddProduct = (props) => {
                 image
             });
             setProduct(edit);
+            //Map through the products and then set the products with the updated product replacing the original product.
+            const updated = products.map(prod => {
+                if(prod.id === product.id){
+                    prod.name = name;
+                    prod.description = description;
+                    prod.price = price;
+                    prod.stock = stock;
+                    prod.brand = brand;
+                    prod.tag = tag;
+                    prod.image = image;
+                    return prod;
+                } else {
+                    return prod;
+                }
+            })
+            setProducts(updated);
         } catch (err) {
             console.error(err);
         };

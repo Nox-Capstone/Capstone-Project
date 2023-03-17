@@ -88,6 +88,7 @@ router.delete('/:id', async (req, res, next) => {
             });
         } else {
             await deleteProducts(id);
+            res.sendStatus(200)
         }
     } catch (err) {
         console.error(err)
