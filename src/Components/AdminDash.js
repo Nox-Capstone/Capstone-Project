@@ -4,7 +4,7 @@ import EditAddProduct from './EditAddProduct';
 import ProductView from './ProductView';
 
 const AdminDash = (props) => {
-    const { products, allUsers, setProducts} = props;
+    const { products, allUsers, setProducts, getProducts} = props;
     const [product, setProduct] = useState({});
     const token = window.localStorage.getItem("token")
 
@@ -26,13 +26,19 @@ const AdminDash = (props) => {
                                     <p>{product.brand}</p>
                                     <p>{product.tag}</p>
                                     <button onClick={() => setProduct(product)}>Edit</button>
-                                    <button onClick={async () => { await fetchDeleteProduct({ id: product.id, token: token }) }}>Delete</button>
+                                    <button onClick={async () => { 
+                                        await fetchDeleteProduct({ id: product.id, token: token }) 
+                                        //await getProducts(); 
+                                        //filter products remove the deleted item and reset products
+                                        const updatedProducts = products.filter(prod => product.id !== prod.id)
+                                        setProducts(updatedProducts);
+                                        }}>Delete</button>
                                 </div>
                             );
                         })};
                     </div>
                     <div className="editProduct">
-                        <EditAddProduct product={product} setProduct={setProduct} setProducts={setProducts} products={products} />
+                        <EditAddProduct product={product} setProduct={setProduct} setProducts={setProducts} products={products} getProducts={getProducts}/>
                     </div>
                     <div className="adminUsers">
                         <h1>Users</h1>

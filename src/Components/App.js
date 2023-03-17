@@ -92,7 +92,7 @@ const App = () => {
         <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
         <Route path='/products/:productId' element={<ProductView products={products} cart={cart} setCart={setCart} />} />
         <Route path='/cart' element={<Cart user={user} cart={cart} setCart={setCart} products={products} />} />
-        <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} setProducts={setProducts} />} />
+        <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} setProducts={setProducts} getProducts={getProducts} />} />
         <Route path='/profile' element={<Profile user={user} />} />
       </Routes>
       <Footer />
