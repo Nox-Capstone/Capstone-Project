@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { fetchDeleteProduct } from '../api/fetch';
 import EditAddProduct from './EditAddProduct';
-import ProductView from './ProductView';
 
 const AdminDash = (props) => {
     const { products, allUsers, setProducts, getProducts} = props;
@@ -28,11 +27,9 @@ const AdminDash = (props) => {
                                     <button onClick={() => setProduct(product)}>Edit</button>
                                     <button onClick={async () => { 
                                         await fetchDeleteProduct({ id: product.id, token: token }) 
-                                        //await getProducts(); 
-                                        //filter products remove the deleted item and reset products
-                                        const updatedProducts = products.filter(prod => product.id !== prod.id)
+                                        const updatedProducts = products.filter(prod => product.id !== prod.id);
                                         setProducts(updatedProducts);
-                                        }}>Delete</button>
+                                    }}>Delete</button>
                                 </div>
                             );
                         })};
@@ -48,7 +45,6 @@ const AdminDash = (props) => {
                                 <div key={user.id}>
                                     <h3>{user.username}</h3>
                                     {user.isAdam? <p>Admin</p> : <p>Standard User</p>}
-                                    {!user.isAdam ? <button>Delete User</button> : null}
                                     <hr></hr>
                                 </div>
                             )
