@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDeleteProduct } from '../api/fetch';
 import EditAddProduct from './EditAddProduct';
+import ProductView from './ProductView';
 
 const AdminDash = (props) => {
-    const { products, allUsers } = props;
+    const { products, allUsers, setProducts} = props;
     const [product, setProduct] = useState({});
     const token = window.localStorage.getItem("token")
 
@@ -31,7 +32,7 @@ const AdminDash = (props) => {
                         })};
                     </div>
                     <div className="editProduct">
-                        <EditAddProduct product={product} setProduct={setProduct} />
+                        <EditAddProduct product={product} setProduct={setProduct} setProducts={setProducts} products={products} />
                     </div>
                     <div className="adminUsers">
                         <h1>Users</h1>

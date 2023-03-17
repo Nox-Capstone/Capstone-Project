@@ -13,12 +13,14 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   useEffect(()=>{
+
     const timeout = setTimeout(()=>{
       navigate("/")
     }, 4000)
     return () =>{
       clearTimeout(timeout)
     }
+    
   },[token])
 
   const getCart = async (id) => {

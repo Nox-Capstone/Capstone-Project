@@ -3,7 +3,7 @@ import { updateProduct, fetchAddProduct, fetchProducts } from '../api/fetch';
 
 
 const EditAddProduct = (props) => {
-    const { product, setProduct } = props;
+    const { product, setProduct, products, setProducts } = props;
     const[name, setName] = useState("");
     const[description, setDescription] = useState("");
     const[price, setPrice] = useState("");
@@ -60,7 +60,7 @@ const EditAddProduct = (props) => {
                 tag,
                 image
             });
-            setProduct(newProduct)
+            setProducts([newProduct, ...products])
         } catch (err) {
             console.error(err);
         };
