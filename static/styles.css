@@ -1,7 +1,8 @@
 /* site wide */
-*{
+* {
   font-family: 'Gruppo', cursive;
 }
+
 body {
   background-color: #DDDDDD;
   font-family: verdana;
@@ -49,6 +50,7 @@ input {
   margin: 1rem;
   border-radius: 5px;
 }
+
 /* admin dash */
 .adminDash {
   display: flex;
@@ -91,14 +93,15 @@ input {
 }
 
 /* product page */
-.productPage{
+.productPage {
   display: flex;
   flex-direction: column;
   width: 90%;
   margin: 0 5rem 0;
   align-items: center;
 }
-.searchbar{
+
+.searchbar {
   height: 35px;
   width: 100%;
   border-color: black;
@@ -159,6 +162,7 @@ input {
   color: #9d9d9d;
   margin: 1rem 0rem;
 }
+
 .productInfo>h2 {
   color: #777;
   font-size: 0.9rem;
@@ -190,7 +194,7 @@ input {
   cursor: pointer;
 }
 
-.atc-container{
+.atc-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -265,43 +269,50 @@ input {
   align-items: center;
 }
 
-.login>a{
+.login>a {
   text-decoration: none;
   color: black;
 }
-.regHead{
+
+.regHead {
   display: flex;
   justify-content: center;
 }
+
 .register {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.register>a{
+.register>a {
   text-decoration: none;
   color: black;
 }
-.clickMe{
+
+.clickMe {
   text-decoration: underline;
   color: black;
 }
-.userpass{
- display: flex; 
- flex-direction: column;
- width: 50%;
- align-items: center;
+
+.userpass {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
 }
-.userpass>input{
-height: 35px;
-width: 100%;
-border-color: black;
+
+.userpass>input {
+  height: 35px;
+  width: 100%;
+  border-color: black;
 }
-.userpass>input>::placeholder{
+
+.userpass>input>::placeholder {
   color: white;
 }
-.userpass>button{
+
+.userpass>button {
   height: 35px;
   border-color: black;
   border-radius: 5rem;
@@ -311,3 +322,80 @@ border-color: black;
   margin: 16px;
 }
 
+/* # FOOTER CSS # */
+
+footer {
+  background-color: #111;
+  height: auto;
+  width: 100vw;
+  padding-top: 40px;
+  color: #fff;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.footer-content h3 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  line-height: 3rem;
+}
+
+.footer-content p {
+  max-width: 500px;
+  margin: 10px auto;
+  line-height: 28px;
+  font-size: 14px;
+}
+
+.social-media-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 3rem 0;
+}
+
+.social-media-links li {
+  margin: 0 10px;
+}
+
+.social-media-links a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.social-media-links a i {
+  font-size: 1.1rem;
+  transition: color .4s ease;
+}
+
+.social-media-links a:hover i {
+  color: dodgerblue;
+}
+
+.footer-bottom {
+  background: #000;
+  width: 100vw;
+  padding: 20px 0;
+  text-align: center;
+}
+
+
+.footer-bottom p {
+  font-size: 14px;
+  word-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.footer-bottom span {
+  text-transform: uppercase;
+  opacity: .4;
+  font-weight: 200;
+}
