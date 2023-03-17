@@ -11,6 +11,7 @@ import AdminDash from './AdminDash';
 import { HiShoppingCart } from 'react-icons/hi'
 import Profile from './Profile';
 import NoxWhite from './Logos/NoxWhite.png';
+import Footer from './Footer';
 
 const App = () => {
   const [auth, setAuth] = useState({});
@@ -52,7 +53,7 @@ const App = () => {
     getAllUsers();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getProducts();
   }, [products])
 
@@ -65,7 +66,7 @@ const App = () => {
   return (
     <div>
       <nav className='navBar'>
-        <Link to='/'><img className='logo' src={NoxWhite}/></Link>
+        <Link to='/'><img className='logo' src={NoxWhite} /></Link>
         {
           <>
             {user.isAdam ? <Link to='/admin'>Admin</Link> : null}
@@ -98,6 +99,7 @@ const App = () => {
         <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} />} />
         <Route path='/profile' element={<Profile user={user} />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
