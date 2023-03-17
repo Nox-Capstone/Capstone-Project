@@ -3,12 +3,26 @@ import { Link, Routes, Route } from "react-router-dom";
 import { addToCart, deleteCartProduct, purchaseCart } from "../api/fetch";
 
 const Cart = (props) => {
-  const { user, cart, setCart, products } = props;
+  const { user, cart, setCart } = props;
   const token = window.localStorage.getItem("token")
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(0)
 
   console.log(cart);
+
+  useEffect(()=>{
+    let sum = 0;
+    if(cart && cart.products){
+      //For-of loop pretty interesting to read about. Basically provides an easier way to loop over iterable objects
+      //without using counter variables or index.
+      for(const product of cart.products){
+        for (let i = 0; i < product.quantity; i++) {
+          sum += product.price;
+        }
+      }
+    }
+    setTotal(sum);
+  }, [cart])
 
   if (!cart && !user) {
     return null;
@@ -25,12 +39,7 @@ const Cart = (props) => {
               quantityArray.push(i)
             }
           }
-          let sum = 0
-          for (let i = 0; i < product.quantity; i++) {
-            sum += product.price;
-          }
-          //setTotal(sum);
-          console.log('total for: ',product.name,' is: $',sum)
+
           return (
             <li key={product.id}>
               {product.name}({product.quantity})
@@ -68,7 +77,7 @@ const Cart = (props) => {
           setCart(newCart);
         }}
       >CHECKOUT</button>
-      <div className="total">Total: ${total}</div>
+      <div className="total">Total: {total}</div>
     </div>
   );
 };
