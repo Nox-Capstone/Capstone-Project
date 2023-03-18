@@ -10,12 +10,12 @@ const Cart = (props) => {
 
   console.log(cart);
 
-  useEffect(()=>{
+  useEffect(() => {
     let sum = 0;
-    if(cart && cart.products){
+    if (cart && cart.products) {
       //For-of loop pretty interesting to read about. Basically provides an easier way to loop over iterable objects
       //without using counter variables or index.
-      for(const product of cart.products){
+      for (const product of cart.products) {
         for (let i = 0; i < product.quantity; i++) {
           sum += product.price;
         }
@@ -30,54 +30,63 @@ const Cart = (props) => {
 
   return (
     <div>
-      <h1>{user.username ? user.username : "Guest"}'s Cart</h1>
-      <ul>
-        {cart.products?.map((product) => {
-          const quantityArray = []
-          for (let i = 1; i < product.stock + 1; i++) {
-            if (i <= 10) {
-              quantityArray.push(i)
+      <div className="cart-page">
+        <h1>{user.username ? user.username : "Guest"}'s Cart</h1>
+        <ul>
+          {cart.products?.map((product) => {
+            const quantityArray = []
+            for (let i = 1; i < product.stock + 1; i++) {
+              if (i <= 10) {
+                quantityArray.push(i)
+              }
             }
-          }
 
-          return (
-            <li key={product.id}>
-              {product.name}({product.quantity})
-              <div>
-                <label>qyt: </label>
-                <select onChange={(ev) =>
-                  setQuantity(ev.target.value)
-                }>
-                  {quantityArray.map(quant =>
-                    <option
-                      value={quant}>{quant}
-                    </option>)
-                  }
-                </select>
-                <button onClick={async () => {
-                  const newCart = await addToCart({ token, productId: product.id, cartId: cart.id, quantity })
-                  setCart(newCart)
-                }}>Update Cart
-                </button>
-              </div>
-              <button
-                onClick={async () => {
-                  const updatedCart = await deleteCartProduct(product.id);
-                  setCart(updatedCart);
-                }}>
-                Remove Item
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-      <button
-        onClick={async () => {
-          const newCart = await purchaseCart();
-          setCart(newCart);
-        }}
-      >CHECKOUT</button>
-      <div className="total">Total: {total}</div>
+            return (
+              <li key={product.id}>
+                <div className="cart-item">
+                  {product.name}({product.quantity})
+                  <img className='cart-img' src={product.image} />
+                  <div className="cart-edit">
+                    <div cart-select>
+                      <label>qyt: </label>
+                      <select onChange={(ev) =>
+                        setQuantity(ev.target.value)
+                      }>
+                        {quantityArray.map(quant =>
+                          <option
+                            value={quant}>{quant}
+                          </option>)
+                        }
+                      </select>
+                    </div>
+                    <button onClick={async () => {
+                      const newCart = await addToCart({ token, productId: product.id, cartId: cart.id, quantity })
+                      setCart(newCart)
+                    }}>Update Cart
+                    </button>
+                    <button
+                      onClick={async () => {
+                        const updatedCart = await deleteCartProduct(product.id);
+                        setCart(updatedCart);
+                      }}>
+                      Remove Item
+                    </button>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="checkout">
+          <p className="total">Total: ${total}</p>
+          <button
+            onClick={async () => {
+              const newCart = await purchaseCart();
+              setCart(newCart);
+            }}
+          >Checkout</button>
+        </div>
+      </div>
     </div>
   );
 };

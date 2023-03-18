@@ -14,14 +14,15 @@ const Login = (props) => {
 
   useEffect(()=>{
 
-    const timeout = setTimeout(()=>{
+    if(user.username){
+      const timeout = setTimeout(()=>{
       navigate("/")
     }, 4000)
     return () =>{
       clearTimeout(timeout)
     }
-    
-  },[token])
+  }
+  },[user])
 
   const getCart = async (id) => {
     const userCart = await fetchCartByUserId(id);

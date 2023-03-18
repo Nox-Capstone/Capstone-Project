@@ -107,6 +107,7 @@ const createInitialUsersAndCarts = async () => {
           username: 'Ithndr',
           password: 'password',
           isAdam: true,
+          image: 'https://preview.redd.it/ydlci6xpb0m71.jpg?auto=webp&s=b398cc6007e1ae602a2f8d568b06fb4fc556e309',
         }),
         createUser({
           username: 'Sid',

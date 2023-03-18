@@ -5,8 +5,13 @@ const Profile = (props) => {
     const { user } = props;
     console.log(user)
     return (
-        <div>
+        <div className="profile">
+            <div className="userInfo">
+            <img src={user.image ? user.image:"https://s.yimg.com/wm/mbr/images/default-profile_192_v0.0.1.png"}/>
             <h2>{user.username}'s Profile</h2>
+            <button>change picture</button>
+            </div>
+            <div className="editSection">
             <button>
                 Change Username
             </button>
@@ -16,6 +21,7 @@ const Profile = (props) => {
             <button>
                 Delete Account
             </button>
+            </div>
         </div>
     )
 }
