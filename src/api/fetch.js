@@ -1,4 +1,4 @@
-const url = '/api'
+const url = process.env.DATABASE_URL;
 
 const fetchLogin = async (username, password) => {
     try {
