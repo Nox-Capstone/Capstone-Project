@@ -1,5 +1,5 @@
 //URL in process.env HERE
-const url = process.env.DATABASE_URL;
+const url = "/api"
 
 const fetchLogin = async (username, password) => {
     try {
