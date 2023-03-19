@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import { fetchProducts, exchangeTokenForUser, fetchCartByUserId, fetchAllUsers } from '../api/fetch';
 import Cart from './Cart';
 import Home from './Home';
@@ -20,6 +20,8 @@ const App = () => {
   const [token, setToken] = useState(null)
   const [cart, setCart] = useState({});
   const [allUsers, setAllUsers] = useState([]);
+
+  // const navigate = useNavigate();
 
   const getProducts = async () => {
     const allProducts = await fetchProducts();
@@ -43,7 +45,6 @@ const App = () => {
 
   const getCart = async (userId) => {
     const cart = await fetchCartByUserId(userId)
-    // console.log("HI I'm CART AT APP", cart)
     setCart(cart);
   }
 
@@ -83,13 +84,11 @@ const App = () => {
           </>
         }
       </nav>
-
       <Routes>
         <Route path='/' element={<Home products={products} />} />
         <Route path='/register' element={<Register setToken={setToken} setUser={setUser} setCart={setCart} />} />
         <Route path='/login' element={<Login token={token} setUser={setUser} user={user} setCart={setCart} />} />
         <Route path='/products' element={<Products products={products} cart={cart} />} />
-        <Route path='/products/search/:term' element={<Products products={products} cart={cart} />} />
         <Route path='/products/:productId' element={<ProductView products={products} cart={cart} setCart={setCart} />} />
         <Route path='/cart' element={<Cart user={user} cart={cart} setCart={setCart} products={products} />} />
         <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} setProducts={setProducts} getProducts={getProducts} />} />
