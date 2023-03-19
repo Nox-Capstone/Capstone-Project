@@ -17,19 +17,24 @@ const AdminDash = (props) => {
                         <hr></hr>
                         {products.map(product => {
                             return (
-                                <div key={product.id}>
-                                    <h3>{product.name}</h3>
-                                    <p>{product.description}</p>
-                                    <p>{product.price}</p>
-                                    <p>{product.quantity}</p>
-                                    <p>{product.brand}</p>
-                                    <p>{product.tag}</p>
-                                    <button onClick={() => setProduct(product)}>Edit</button>
-                                    <button onClick={async () => { 
-                                        await fetchDeleteProduct({ id: product.id, token: token }) 
-                                        const updatedProducts = products.filter(prod => product.id !== prod.id);
-                                        setProducts(updatedProducts);
-                                    }}>Delete</button>
+                                <div className="adminProdCard" key={product.id}>
+                                    <div className="adminProdCardInfo">
+                                        <h3>{product.name}</h3>
+                                        <p>{product.description}</p>
+                                        <p>{product.price}</p>
+                                        <p>{product.quantity}</p>
+                                        <p>{product.brand}</p>
+                                        <p>{product.tag}</p>
+                                        <button onClick={() => setProduct(product)}>Edit</button>
+                                        <button onClick={async () => { 
+                                            await fetchDeleteProduct({ id: product.id, token: token }) 
+                                            const updatedProducts = products.filter(prod => product.id !== prod.id);
+                                            setProducts(updatedProducts);
+                                        }}>Delete</button>
+                                    </div>
+                                    <div className="adminProdCardImg">
+                                        <img src={product.image} />
+                                    </div>
                                 </div>
                             );
                         })};
