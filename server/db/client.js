@@ -1,4 +1,4 @@
 const pg = require('pg');
-const client = new pg.Client('postgres://localhost/noxDB' || process.env.DATABASE_URL);
+const client = new pg.Client( process.env.DATABASE_URL || 'postgres://localhost/noxDB');
 
 module.exports = client;
