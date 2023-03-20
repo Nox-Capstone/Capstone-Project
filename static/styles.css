@@ -26,6 +26,17 @@ button{
   font-size: large;
   margin: 16px;
   background-color: 2d2d2d;
+  box-shadow: 2px 3px 1px 1px black;
+}
+
+button:hover {
+  background-color: rgba(199, 119, 40, 0.824);
+  cursor: pointer;
+}
+
+button:active {
+  background-color: cornsilk;
+  box-shadow: none;
 }
 
 nav {
@@ -554,8 +565,9 @@ footer {
   width: 20%;
 }
 .cart-img{
-  height: 10rem;
-  width: auto;
+  width: 75%;
+  height: auto;
+  max-height: 185px;
   background-color: white;
   border-radius: .5rem;
   margin: 4px;
@@ -568,11 +580,15 @@ footer {
 .cart-edit{
 display: flex;
 align-items: center;
+height: 50px;
+}
+.cart-edit>div>select {
+  border-radius: .5rem;
 }
 .cart-edit>button{
   height: 20px;
   font-size: small;
-  margin: 8px;
+  margin: 4px;
 }
 .checkout{
   display: flex;
