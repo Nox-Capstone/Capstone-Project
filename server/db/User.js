@@ -4,8 +4,6 @@ const JWT = process.env.JWT_SECRET;
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-// REMINDER TO ADD UPDATE, AND DELETE USERS
-
 const createUser = async ({ username, password, isAdam }) => {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   const SQL = `
@@ -19,7 +17,6 @@ const createUser = async ({ username, password, isAdam }) => {
 
 const getUserByToken = async (token) => {
   const payload = await jwt.verify(token, JWT);
-  console.log(payload)
   const SQL = `
     SELECT users.*
     FROM users
@@ -119,7 +116,6 @@ const getAllUsers = async () => {
   }
 }
 
-
 const authenticate = async ({ username, password }) => {
   const SQL = `
     SELECT id
@@ -135,8 +131,6 @@ const authenticate = async ({ username, password }) => {
   return jwt.sign({ id: response.rows[0].id }, JWT_SECRET);
 }
 
-//Update and Delete functions for Tier II requirements
-
 module.exports = {
   createUser,
   authenticate,
@@ -147,6 +141,5 @@ module.exports = {
   getAllUsers,
   updateUsers,
   thanosSnapUser,
-
 };
 

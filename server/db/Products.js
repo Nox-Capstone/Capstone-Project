@@ -1,5 +1,5 @@
 const client = require('./client');
-//ADD REVIEWS TO PRODUCTS
+
 const createProduct = async ({ name, description, price, stock, brand, tag, image }) => {
     try {
         const SQL = `
@@ -69,7 +69,7 @@ const updateProducts = async ({ id, ...fields }) => {
     const setFields = Object.keys(fields).map(
         (key, index) => `"${key}"=$${index + 1}`
     ).join(', ');
-    console.log(setFields)
+    
     try {
         const { rows: [product] } = await client.query(`
         UPDATE products
@@ -94,8 +94,6 @@ const deleteProducts = async (id) => {
         throw err;
     }
 }
-
-
 
 module.exports = {
     createProduct,

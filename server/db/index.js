@@ -131,17 +131,6 @@ const createInitialUsersAndCarts = async () => {
   }
 }
 
-// const createInitialCart = () => {
-//   try {
-//     console.log('Creating Carts for Users');
-//     const cartsToCreate = [
-
-//     ]
-//   } catch (err) {
-//     throw err;
-//   }
-// }
-
 const createInitialProducts = async () => {
   try {
     console.log('Starting Create Products')
