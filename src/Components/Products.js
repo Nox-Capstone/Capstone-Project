@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import { addToCart } from '../api/fetch';
+import {HiSearch} from 'react-icons/hi'
 
 
 
@@ -16,8 +17,8 @@ const Products = props => {
   return (
     <div className='productPage'>
       <div className='search-products'>
-        <h3>Search Products</h3>
-        <input value={searchPhrase} onChange={ev => setSearchPhrase(ev.target.value)} />
+        <input value={searchPhrase} placeholder='search products' onChange={ev => setSearchPhrase(ev.target.value)} />
+        <button className='srcBtn'><HiSearch className='search-icon'/></button>
       </div>
       <div className="products-container">
         {productSearchFilter.map(product => {

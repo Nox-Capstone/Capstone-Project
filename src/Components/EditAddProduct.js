@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { updateProduct, fetchAddProduct } from '../api/fetch';
 
 
