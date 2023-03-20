@@ -35,7 +35,6 @@ router.post('/', async (req, res, next) => {
 
 router.post('/checkout', async (req, res, next) => {
     const user = await getUserByToken(req.headers.authorization);
-    console.log(user)
     const cart = await getCartByUserId(user.id);
     const newCart = await checkoutCart(cart.id, user.id);
     res.send(newCart);

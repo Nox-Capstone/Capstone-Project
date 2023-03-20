@@ -79,7 +79,6 @@ router.patch('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
     const { id } = req.params;
-    console.log("API PRODUCT ID", req.params);
     try {
         if (!req.params || !req.body) {
             res.send({

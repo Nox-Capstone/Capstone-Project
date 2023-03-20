@@ -154,7 +154,6 @@ const fetchCartProductByCartId = async (cartId) => {
             }
         })
         const result = await response.json();
-        console.log()
         return result;
     } catch (error) {
         console.error(error);
@@ -265,7 +264,6 @@ const fetchDeleteProduct = async ({ id, token }) => {
 const deleteCartProduct = async (productsId) => {
     try {
         const token = window.localStorage.getItem("token");
-        console.log(productsId, "calling delete cart product");
         if (!token) return;
         const response = await fetch(`${url}/cart_products/${productsId}`, {
             method: 'DELETE',

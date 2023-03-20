@@ -1,4 +1,5 @@
 const client = require('./client');
+
 const {
   getUserByToken,
   createUser,
@@ -87,21 +88,25 @@ const createInitialUsersAndCarts = async () => {
           username: 'Ethan',
           password: 'Deadbattery1',
           isAdam: true,
+          image: `https://drive.google.com/uc?id=1uqlN_dsIo53Dv02UdqUIW67pcE2ra_BB`,
         }),
         createUser({
           username: 'Prof',
           password: 'Pradaroundmyneck420',
           isAdam: false,
+          image: 'https://preview.redd.it/ydlci6xpb0m71.jpg?auto=webp&s=b398cc6007e1ae602a2f8d568b06fb4fc556e309',
         }),
         createUser({
           username: 'Adam',
           password: 'IsAdam8',
           isAdam: false,
+          image: 'https://preview.redd.it/ydlci6xpb0m71.jpg?auto=webp&s=b398cc6007e1ae602a2f8d568b06fb4fc556e309',
         }),
         createUser({
           username: 'Daniel',
           password: 'Theboywholived5',
           isAdam: false,
+          image: 'https://preview.redd.it/ydlci6xpb0m71.jpg?auto=webp&s=b398cc6007e1ae602a2f8d568b06fb4fc556e309',
         }),
         createUser({
           username: 'Ithndr',
@@ -113,6 +118,7 @@ const createInitialUsersAndCarts = async () => {
           username: 'Sid',
           password: 'asdf1234',
           isAdam: true,
+          image: 'https://cdn.discordapp.com/attachments/1077251616727646329/1087485464736440360/IMG_7306.jpg',
         }),
       ]);
     console.log('Finished Creating Users');

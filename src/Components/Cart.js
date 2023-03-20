@@ -8,8 +8,6 @@ const Cart = (props) => {
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(0)
 
-  console.log(cart);
-
   useEffect(() => {
     let sum = 0;
     if (cart && cart.products) {

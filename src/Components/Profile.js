@@ -3,7 +3,6 @@ import { Link, Routes, Route } from "react-router-dom";
 
 const Profile = (props) => {
     const { user } = props;
-    console.log(user)
     return (
         <div className="profile">
             <div className="userInfo">
