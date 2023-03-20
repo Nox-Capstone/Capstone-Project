@@ -4,14 +4,14 @@ const JWT = process.env.JWT_SECRET;
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-const createUser = async ({ username, password, isAdam }) => {
+const createUser = async ({ username, password, isAdam, image }) => {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   const SQL = `
-    INSERT INTO users(username, password, "isAdam")
-    VALUES($1, $2, $3) 
+    INSERT INTO users(username, password, "isAdam", image)
+    VALUES($1, $2, $3, $4) 
     RETURNING *
   `;
-  const response = await client.query(SQL, [username, hashedPassword, isAdam]);
+  const response = await client.query(SQL, [username, hashedPassword, isAdam, image]);
   return response.rows[0];
 }
 

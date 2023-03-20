@@ -27,7 +27,6 @@ const Login = (props) => {
   const getCart = async (id) => {
     const userCart = await fetchCartByUserId(id);
     setCart(userCart);
-    console.log(userCart);
   };
 
   const login = async (ev) => {
@@ -37,7 +36,6 @@ const Login = (props) => {
     if (token) {
       window.localStorage.setItem("token", token);
       const user = await fetchUser(token);
-      console.log("line 20 user", user);
       setUser(user);
       getCart(user.id)
       toast.success('Login Successful!')
