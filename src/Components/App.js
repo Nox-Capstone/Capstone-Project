@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Routes, Route, useParams, useNavigate } from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
 import { fetchProducts, exchangeTokenForUser, fetchCartByUserId, fetchAllUsers } from '../api/fetch';
 import Cart from './Cart';
 import Home from './Home';
@@ -22,8 +22,6 @@ const App = () => {
   const [cart, setCart] = useState({});
   const [allUsers, setAllUsers] = useState([]);
 
-  // const navigate = useNavigate();
-
   const getProducts = async () => {
     const allProducts = await fetchProducts();
     setProducts(allProducts)
@@ -34,7 +32,6 @@ const App = () => {
     const allUsers = await fetchAllUsers();
     setAllUsers(allUsers);
   }
-
 
   const getUser = async () => {
     if (window.localStorage.getItem("token")) {

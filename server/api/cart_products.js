@@ -9,12 +9,8 @@ router.post('/', async (req, res, next) => {
     const token = req.headers.authorization.slice(7);
     try {
         const user = await getUserByToken(token);
-
-        // console.log("User: ", user)
         await addProductToCart({ productsId, cartId, quantity })
         const cart = await getCartByUserId(user.id)
-        // console.log("Cart: ", cart)
-
         res.send(cart);
     } catch (error) {
         next(error)
@@ -34,7 +30,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
     const { id } = req.params;
-    // console.log('REQUEST TO DELETE PRODUCT', id);
     const token = req.headers.authorization.slice(7);
     const user = await getUserByToken(token);
     if (!user) {
@@ -44,12 +39,9 @@ router.delete('/:id', async (req, res, next) => {
         return;
     }
     const cart = await getCartByUserId(user.id);
-    // console.log('CART', cart)
     await deleteProductFromCart({ productsId: id, cartId: cart.id });
-    // const updatedCart = await getCartProductByCart(cart.id)
     const updatedCart = await getCartByUserId(user.id)
     res.send(updatedCart);
-    // res.send(cart);
 });
 
 module.exports = router;

@@ -13,7 +13,6 @@ router.post('/register', async (req, res, next) => {
         const _user = await getUserByUsername(username);
         
         if (_user) {
-            console.log('user found')
             res.send({
                 error: "Error",
                 name: "Registration Error",
@@ -45,7 +44,6 @@ router.post('/login', requireUserPass, async (req, res, next) => {
     try {
         const { username, password } = req.body;
         const user = await getUserByUsername(username);
-        // console.log(user)
         const match = await bcrypt.compare(password, user.password)
         if (!match) {
             res.send({

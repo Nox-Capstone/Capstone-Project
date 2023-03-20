@@ -8,7 +8,6 @@ const Cart = (props) => {
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(0)
   const navigate = useNavigate();
-  console.log(cart);
 
   useEffect(() => {
     let sum = 0;
