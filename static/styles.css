@@ -729,11 +729,46 @@ footer {
   margin: 4px;
 }
 
-.checkout {
+.toCheckout {
   display: flex;
 }
 
-.checkout>p {
+.toCheckout>p {
   font-size: large;
   font-weight: bold;
+}
+
+/* checkout page */
+
+.checkout-page{
+  display: flex;
+  margin: 2px;
+}
+.checkout-left{
+  display: flex;
+  flex-direction: column;
+}
+.checkout-right{
+  display: flex;
+  flex-direction: column;
+}
+.checkout-page>div>input{
+  margin: 2px;
+
+}
+.checkout-page>div{
+  display: flex;
+  width: 50%;
+}
+.checkout-name{
+  display: flex;
+
+}
+.address{
+  display: flex;
+
+}
+.payment{
+  display: flex;
+
 }

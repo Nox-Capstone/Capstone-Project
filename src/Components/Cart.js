@@ -77,7 +77,7 @@ const Cart = (props) => {
             );
           })}
         </ul>
-        <div className="checkout">
+        <div className="toCheckout">
           <p className="total">Total: ${total}</p>
           <button onClick={()=>{
            navigate('/checkout')
