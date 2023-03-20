@@ -11,38 +11,40 @@ const ProductView = props => {
     return null;
   }
   return (
-    <div>
-      {
-        <h3>
-          <Link to={'/products'}>
-            {' '}<BsFillArrowLeftSquareFill />{' '}
-          </Link>
-        </h3>
-      }
-      <div className="details-styles">
-        <img src={product.image} />
-        <div className="productInfo">
-          <h2>
-            {product.brand} {product.name}
-          </h2>
-          <p>
-            Price: ${product.price}
-          </p>
-          <p>
-            Description: {product.description}
-          </p>
-          <p>
-            Product Type: {product.tag}
-          </p>
-          <p>
-            Stock: {product.stock}
-          </p>
-          <div className='atcButton'>
-            <AddToCart product={product} cartId={cart.id} setCart={setCart} />
+    <form>
+      <div className='single-page'>
+          <h3>
+            <Link to={'/products'}>
+              {' '}<BsFillArrowLeftSquareFill className='backArrow' />{' '}
+            </Link>
+          </h3>
+        <div className="details-styles">
+          <div className='single-image'>
+            <img src={product.image} />
+          </div>
+          <div className="single-product-info">
+            <h2>
+              {product.brand} {product.name}
+            </h2>
+            <p>
+              Price: ${product.price}
+            </p>
+            <p>
+              Description: {product.description}
+            </p>
+            <p>
+              Product Type: {product.tag}
+            </p>
+            <p>
+              Stock: {product.stock}
+            </p>
+            <div className='atcButton'>
+              <AddToCart product={product} cartId={cart.id} setCart={setCart} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

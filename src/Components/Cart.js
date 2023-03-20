@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, Routes, Route } from "react-router-dom";
-import { addToCart, deleteCartProduct, purchaseCart } from "../api/fetch";
+import { Link, useNavigate } from 'react-router-dom';
+import { addToCart, deleteCartProduct} from "../api/fetch";
 
 const Cart = (props) => {
   const { user, cart, setCart } = props;
   const token = window.localStorage.getItem("token")
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(0)
-
+  const navigate = useNavigate();
   console.log(cart);
 
   useEffect(() => {
@@ -79,12 +79,9 @@ const Cart = (props) => {
         </ul>
         <div className="checkout">
           <p className="total">Total: ${total}</p>
-          <button
-            onClick={async () => {
-              const newCart = await purchaseCart();
-              setCart(newCart);
-            }}
-          >Checkout</button>
+          <button onClick={()=>{
+           navigate('/checkout')
+          }}>Continue to Checkout</button>
         </div>
       </div>
     </div>

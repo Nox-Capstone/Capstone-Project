@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { addToCart } from '../api/fetch';
-import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
-
+import {BiMinus, BiPlus} from 'react-icons/bi'
 
 const AddToCart = props => {
   const { product, cartId, setCart } = props;
@@ -41,7 +40,7 @@ const AddToCart = props => {
             quantity - 1 > 0 ? setQuantity(quantity - 1) : null;
           }}
         >
-          <AiFillMinusCircle />
+          <BiMinus />
         </button>
         <input type="number" value={quantity} disabled={true} />
         <button
@@ -51,7 +50,7 @@ const AddToCart = props => {
             quantity + 1 <= product.stock ? setQuantity(quantity + 1) : null;
           }}
         >
-          <AiFillPlusCircle />
+          <BiPlus />
         </button>
       </div>
       <div className="add-btn-div">
