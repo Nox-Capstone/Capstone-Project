@@ -11,6 +11,7 @@ import AdminDash from './AdminDash';
 import CheckoutPage from './CheckoutPage';
 import Footer from './Footer';
 import Profile from './Profile';
+import Thankyou from './Thankyou';
 import { HiShoppingCart } from 'react-icons/hi'
 import NoxWhite from './Logos/NoxWhite.png';
 
@@ -92,6 +93,7 @@ const App = () => {
         <Route path='/admin' element={<AdminDash products={products} allUsers={allUsers} setProducts={setProducts} getProducts={getProducts} />} />
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/checkout' element={<CheckoutPage user={user} cart={cart} setCart={setCart} products={products} /> } />
+        <Route path='thankyou' element={<Thankyou /> } />
       </Routes>
       <Footer />
     </div>
