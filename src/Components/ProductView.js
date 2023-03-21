@@ -11,7 +11,6 @@ const ProductView = props => {
     return null;
   }
   return (
-    <form>
       <div className='single-page'>
           <h3>
             <Link to={'/products'}>
@@ -44,7 +43,6 @@ const ProductView = props => {
           </div>
         </div>
       </div>
-    </form>
   );
 };
 
